@@ -223,6 +223,169 @@ const labs = [
       ],
     },
   },
+  {
+    id: "lab-2",
+    shortTitle: "ЛР2",
+    title: "Лабораторная работа 2",
+    subtitle: "Threading, multiprocessing, asyncio и параллельный парсинг с сохранением в PostgreSQL",
+    status: "Готово",
+    semester: "2025-2026",
+    theme: "Сравнение concurrency-подходов в Python",
+    summary:
+      "ЛР2 оформлена отдельной папкой lab_2 и содержит 6 программ: три для вычислительной задачи и три для параллельного парсинга веб-страниц. Результаты парсинга сохраняются в PostgreSQL, а в отчете собраны реальные замеры времени и выводы.",
+    metrics: [
+      { label: "Программы", value: "6" },
+      { label: "URL в парсинге", value: "6" },
+      { label: "Подходы", value: "3" },
+      { label: "БД", value: "PostgreSQL" },
+    ],
+    sections: {
+      summaryCards: [
+        {
+          kicker: "Часть 1",
+          title: "Вычислительная задача",
+          text: "Сделаны три реализации для подсчета суммы от 1 до 10000000000000: threading, multiprocessing и asyncio. Задача делится на диапазоны, а сама сумма считается функцией calculate_sum().",
+        },
+        {
+          kicker: "Часть 2",
+          title: "Параллельный парсинг",
+          text: "Сделаны три отдельные программы для загрузки HTML-страниц, извлечения заголовка и сохранения результата в PostgreSQL через таблицу ParsedPage.",
+        },
+        {
+          kicker: "Итог",
+          title: "Реальные замеры",
+          text: "В lab_2/REPORT.md уже внесены реальные результаты запуска на твоей машине. Для парсинга лучшим оказался async, а для формульной вычислительной задачи multiprocessing проиграл из-за накладных расходов.",
+        },
+      ],
+      timeline: [
+        {
+          title: "Лабораторная работа 2",
+          text: "Отдельный проект с общими модулями, 6 исполняемыми программами, PostgreSQL-сохранением и готовым отчетом по результатам.",
+          folder: `${repoBase}/tree/main/lab_2`,
+          commit: `${repoBase}/commit/4944971`,
+          commitLabel: "4944971",
+        },
+      ],
+      links: [
+        {
+          title: "GitHub ссылки",
+          text: "Ссылки на папку лабораторной, коммит и основные файлы проекта.",
+          items: [
+            { label: "Папка lab_2", href: `${repoBase}/tree/main/lab_2` },
+            { label: "Коммит lab_2", href: `${repoBase}/commit/4944971` },
+            { label: "Отчет REPORT.md", href: `${repoBase}/blob/main/lab_2/REPORT.md` },
+            { label: "README", href: `${repoBase}/blob/main/lab_2/README.md` },
+          ],
+        },
+        {
+          title: "Ключевые файлы",
+          text: "Основные модули и программы для вычислений и парсинга.",
+          items: [
+            { label: "task1_threading.py", href: `${repoBase}/blob/main/lab_2/task1_threading.py` },
+            { label: "task1_multiprocessing.py", href: `${repoBase}/blob/main/lab_2/task1_multiprocessing.py` },
+            { label: "task1_async.py", href: `${repoBase}/blob/main/lab_2/task1_async.py` },
+            { label: "task2_threading.py", href: `${repoBase}/blob/main/lab_2/task2_threading.py` },
+            { label: "task2_multiprocessing.py", href: `${repoBase}/blob/main/lab_2/task2_multiprocessing.py` },
+            { label: "task2_async.py", href: `${repoBase}/blob/main/lab_2/task2_async.py` },
+          ],
+        },
+      ],
+      endpointGroups: [
+        {
+          title: "Часть 1. Вычисления",
+          text: "Сравнение подходов на задаче суммирования диапазона с разбиением на подзадачи.",
+          routes: [
+            ["RUN", "python task1_threading.py"],
+            ["RUN", "python task1_multiprocessing.py"],
+            ["RUN", "python task1_async.py"],
+          ],
+        },
+        {
+          title: "Часть 2. Парсинг",
+          text: "Параллельная загрузка веб-страниц с сохранением URL, source_name, title, status_code и fetch_method в PostgreSQL.",
+          routes: [
+            ["RUN", "python task2_threading.py"],
+            ["RUN", "python task2_multiprocessing.py"],
+            ["RUN", "python task2_async.py"],
+          ],
+        },
+      ],
+      models: [
+        {
+          title: "ParsedPage",
+          text: "Таблица для сохранения результатов парсинга в ту же PostgreSQL-среду, что использовалась в лабораторной 1.",
+          fields: [
+            "id: int | None",
+            "url: str",
+            "source_name: str",
+            "title: str",
+            "fetch_method: str",
+            "status_code: int",
+            "fetched_at: datetime",
+          ],
+        },
+        {
+          title: "Вычислительные модули",
+          text: "Общая логика вычислений вынесена в compute_shared.py.",
+          fields: [
+            "calculate_sum(start, end)",
+            "split_range(limit, chunks)",
+            "timed_run(...)",
+            "ComputeResult",
+          ],
+        },
+        {
+          title: "Парсинг и БД",
+          text: "Общая логика парсинга вынесена в parse_shared.py и db.py.",
+          fields: [
+            "extract_title(html)",
+            "save_page_result(...)",
+            "reset_results(fetch_method)",
+            "timed_parse_run(...)",
+          ],
+        },
+        {
+          title: "Результаты запуска",
+          text: "В отчет уже включены реальные замеры времени.",
+          fields: [
+            "Task1 threading: 0.000901 s",
+            "Task1 multiprocessing: 0.284765 s",
+            "Task1 asyncio: 0.001184 s",
+            "Task2 threading: 9.758948 s",
+            "Task2 multiprocessing: 10.553567 s",
+            "Task2 async: 8.307293 s",
+          ],
+        },
+      ],
+      codeFiles: [
+        {
+          title: "Подключение к БД",
+          label: "lab_2/app/db.py",
+          path: "./code/lab2/db.py.txt",
+        },
+        {
+          title: "Модель ParsedPage",
+          label: "lab_2/app/models.py",
+          path: "./code/lab2/models.py.txt",
+        },
+        {
+          title: "Multiprocessing вычисления",
+          label: "lab_2/task1_multiprocessing.py",
+          path: "./code/lab2/task1_multiprocessing.py.txt",
+        },
+        {
+          title: "Async парсинг",
+          label: "lab_2/task2_async.py",
+          path: "./code/lab2/task2_async.py.txt",
+        },
+        {
+          title: "Отчет по ЛР2",
+          label: "lab_2/REPORT.md",
+          path: "./code/lab2/report.md.txt",
+        },
+      ],
+    },
+  },
 ];
 
 const futureLabs = [
