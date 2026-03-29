@@ -386,6 +386,174 @@ const labs = [
       ],
     },
   },
+  {
+    id: "lab-3",
+    shortTitle: "ЛР3",
+    title: "Лабораторная работа 3",
+    subtitle: "Docker, parser-service, Redis, Celery и интеграция парсинга в FastAPI",
+    status: "Готово",
+    semester: "2025-2026",
+    theme: "Контейнеризация сервиса личных финансов",
+    summary:
+      "ЛР3 оформлена в students/k3341/Dushchenko_Daniil/Lr3 и объединяет основной FastAPI API, отдельный HTTP parser-service, PostgreSQL, Redis и Celery. Реализованы два сценария: синхронный вызов парсера из API и асинхронный запуск через очередь.",
+    metrics: [
+      { label: "Сервисы", value: "6" },
+      { label: "Dockerfile", value: "2" },
+      { label: "Очередь", value: "Celery" },
+      { label: "Брокер", value: "Redis" },
+    ],
+    sections: {
+      summaryCards: [
+        {
+          kicker: "Минимум",
+          title: "Docker + HTTP parser",
+          text: "Основной API и parser-service запускаются в отдельных контейнерах, а FastAPI умеет вызывать парсер по HTTP через внутреннюю docker-сеть.",
+        },
+        {
+          kicker: "Полная версия",
+          title: "Celery + Redis",
+          text: "Для варианта на 100% добавлены Redis, Celery worker, Celery Beat и асинхронный эндпоинт постановки задачи парсинга в очередь.",
+        },
+        {
+          kicker: "Интеграция",
+          title: "На базе ЛР1 и ЛР2",
+          text: "В качестве основного приложения используется финальный FastAPI из ЛР1, а логика парсинга и сохранения результатов в БД продолжает тему ЛР2.",
+        },
+      ],
+      timeline: [
+        {
+          title: "Лабораторная работа 3",
+          text: "Отдельная папка со структурой students/.../Lr3, Docker-окружением, parser-service, синхронной интеграцией и очередью Celery.",
+          folder: `${repoBase}/tree/main/students/k3341/Dushchenko_Daniil/Lr3`,
+          commit: `${repoBase}/commits/main/`,
+          commitLabel: "main history",
+        },
+      ],
+      links: [
+        {
+          title: "GitHub ссылки",
+          text: "Ссылки на папку ЛР3 и ключевые файлы инфраструктуры.",
+          items: [
+            { label: "Папка Lr3", href: `${repoBase}/tree/main/students/k3341/Dushchenko_Daniil/Lr3` },
+            { label: "docker-compose.yml", href: `${repoBase}/blob/main/students/k3341/Dushchenko_Daniil/Lr3/docker-compose.yml` },
+            { label: "README", href: `${repoBase}/blob/main/students/k3341/Dushchenko_Daniil/Lr3/README.md` },
+            { label: "REPORT.md", href: `${repoBase}/blob/main/students/k3341/Dushchenko_Daniil/Lr3/REPORT.md` },
+          ],
+        },
+        {
+          title: "Сервисы",
+          text: "Ключевые части новой архитектуры лабораторной работы.",
+          items: [
+            { label: "finance_api", href: `${repoBase}/tree/main/students/k3341/Dushchenko_Daniil/Lr3/finance_api` },
+            { label: "parser_service", href: `${repoBase}/tree/main/students/k3341/Dushchenko_Daniil/Lr3/parser_service` },
+            { label: "finance_api main.py", href: `${repoBase}/blob/main/students/k3341/Dushchenko_Daniil/Lr3/finance_api/app/main.py` },
+            { label: "parser_service main.py", href: `${repoBase}/blob/main/students/k3341/Dushchenko_Daniil/Lr3/parser_service/app/main.py` },
+            { label: "celery_app.py", href: `${repoBase}/blob/main/students/k3341/Dushchenko_Daniil/Lr3/finance_api/app/celery_app.py` },
+          ],
+        },
+      ],
+      endpointGroups: [
+        {
+          title: "Основной Finance API",
+          text: "Маршруты интеграции parser-service в пользовательское API сервиса личных финансов.",
+          routes: [
+            ["GET", "/"],
+            ["POST", "/parser/parse-sync"],
+            ["POST", "/parser/parse-async"],
+            ["GET", "/parser/tasks/{task_id}"],
+          ],
+        },
+        {
+          title: "Parser Service",
+          text: "Отдельный HTTP-сервис, который загружает страницу, извлекает title и сохраняет результат в PostgreSQL.",
+          routes: [
+            ["GET", "/health"],
+            ["POST", "/parse"],
+          ],
+        },
+        {
+          title: "Docker Compose",
+          text: "Все сервисы запускаются через один compose-файл.",
+          routes: [
+            ["RUN", "docker compose up --build"],
+            ["RUN", "celery worker"],
+            ["RUN", "celery beat"],
+          ],
+        },
+      ],
+      models: [
+        {
+          title: "ParseRequest",
+          text: "Модель запроса на парсинг URL в основном API и parser-service.",
+          fields: [
+            "url: str",
+          ],
+        },
+        {
+          title: "ParseResultResponse",
+          text: "Модель синхронного ответа parser-service.",
+          fields: [
+            "message: str",
+            "url: str",
+            "title: str",
+            "source_name: str",
+            "status_code: int",
+            "fetch_method: str",
+          ],
+        },
+        {
+          title: "TaskStatusResponse",
+          text: "Статус фоновой задачи Celery.",
+          fields: [
+            "task_id: str",
+            "status: str",
+            "ready: bool",
+            "result: dict | None",
+          ],
+        },
+        {
+          title: "ParsedPage",
+          text: "Таблица parser-service для сохранения результатов парсинга в PostgreSQL.",
+          fields: [
+            "id: int | None",
+            "url: str",
+            "source_name: str",
+            "title: str",
+            "fetch_method: str",
+            "status_code: int",
+            "fetched_at: datetime",
+          ],
+        },
+      ],
+      codeFiles: [
+        {
+          title: "Finance API",
+          label: "Lr3/finance_api/app/main.py",
+          path: "./code/lab3/finance_main.py.txt",
+        },
+        {
+          title: "Celery Config",
+          label: "Lr3/finance_api/app/celery_app.py",
+          path: "./code/lab3/celery_app.py.txt",
+        },
+        {
+          title: "Parser Service",
+          label: "Lr3/parser_service/app/main.py",
+          path: "./code/lab3/parser_main.py.txt",
+        },
+        {
+          title: "Docker Compose",
+          label: "Lr3/docker-compose.yml",
+          path: "./code/lab3/docker-compose.yml.txt",
+        },
+        {
+          title: "Отчет по ЛР3",
+          label: "Lr3/REPORT.md",
+          path: "./code/lab3/report.md.txt",
+        },
+      ],
+    },
+  },
 ];
 
 const futureLabs = [

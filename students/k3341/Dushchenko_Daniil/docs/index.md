@@ -8,11 +8,13 @@
 
 - [Лабораторная работа 1](lr1.md)
 - [Лабораторная работа 2](lr2.md)
+- [Лабораторная работа 3](lr3.md)
 
 ## Структура сдачи
 
 - `students/k3341/Dushchenko_Daniil/Lr1`
 - `students/k3341/Dushchenko_Daniil/Lr2`
+- `students/k3341/Dushchenko_Daniil/Lr3`
 - `students/k3341/Dushchenko_Daniil/docs`
 
 ## Дополнительно
