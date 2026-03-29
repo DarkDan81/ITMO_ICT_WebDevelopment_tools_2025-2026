@@ -490,8 +490,13 @@ async function renderCodeBlocks(lab) {
     const codeElement = node.querySelector("code");
 
     try {
-      const response = await fetch(file.path);
-      const text = await response.text();
+      let text = null;
+      if (typeof CODE_FILES !== "undefined" && CODE_FILES[file.path]) {
+        text = CODE_FILES[file.path];
+      } else {
+        const response = await fetch(file.path);
+        text = await response.text();
+      }
       codeElement.textContent = text;
       node.querySelector(".copy-button").addEventListener("click", async () => {
         await navigator.clipboard.writeText(text);
