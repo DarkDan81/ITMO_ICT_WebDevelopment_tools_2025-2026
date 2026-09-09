@@ -1,8 +1,8 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, HttpUrl
 
 
 class ParseRequest(BaseModel):
-    url: str = Field(..., max_length=500)
+    url: HttpUrl = Field(..., max_length=500)
 
 
 class ParseResultResponse(BaseModel):
@@ -25,3 +25,4 @@ class TaskStatusResponse(BaseModel):
     status: str
     ready: bool
     result: dict | None = None
+    error: str | None = None

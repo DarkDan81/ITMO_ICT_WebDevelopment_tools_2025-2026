@@ -6,82 +6,124 @@ services:
     environment:
       POSTGRES_DB: personal_finance_lab3
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
-      - "5434:5432"
+      - "127.0.0.1:${DB_PORT:-5434}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d personal_finance_lab3"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
 
   redis:
     image: redis:7-alpine
     container_name: lr3-redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  migrate:
+    build: ./finance_api
+    command: python migrate.py
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+    depends_on:
+      db:
+        condition: service_healthy
 
   parser-service:
-    build:
-      context: ./parser_service
+    build: ./parser_service
     container_name: lr3-parser-service
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/personal_finance_lab3
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+      ROOT_PATH: ${PARSER_ROOT_PATH:-}
     depends_on:
-      - db
+      migrate:
+        condition: service_completed_successfully
     ports:
-      - "8001:8000"
+      - "127.0.0.1:${PARSER_PORT:-8001}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   finance-api:
-    build:
-      context: ./finance_api
+    build: ./finance_api
     container_name: lr3-finance-api
     restart: unless-stopped
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/personal_finance_lab3
+    environment: &finance-env
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      ROOT_PATH: ${LR3_ROOT_PATH:-}
       PARSER_SERVICE_URL: http://parser-service:8000
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
-      SCHEDULED_PARSE_URL: https://www.imf.org/
+      SCHEDULED_PARSE_URL: ${SCHEDULED_PARSE_URL:-https://www.worldbank.org/}
+      PARSE_INTERVAL_SECONDS: ${PARSE_INTERVAL_SECONDS:-21600}
     depends_on:
-      - db
-      - parser-service
-      - redis
+      parser-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     ports:
-      - "8000:8000"
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  lr1-api:
+    build: ../Lr1/practice_1_3
+    container_name: lr1-finance-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      ROOT_PATH: ${LR1_ROOT_PATH:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${LR1_PORT:-8011}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   celery-worker:
-    build:
-      context: ./finance_api
+    build: ./finance_api
     container_name: lr3-celery-worker
     restart: unless-stopped
-    command: celery -A app.celery_app:celery_app worker --loglevel=info
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/personal_finance_lab3
-      PARSER_SERVICE_URL: http://parser-service:8000
-      CELERY_BROKER_URL: redis://redis:6379/0
-      CELERY_RESULT_BACKEND: redis://redis:6379/0
-      SCHEDULED_PARSE_URL: https://www.imf.org/
+    command: celery -A app.celery_app:celery_app worker --loglevel=info --concurrency=2
+    environment: *finance-env
     depends_on:
-      - db
-      - parser-service
-      - redis
+      parser-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
   celery-beat:
-    build:
-      context: ./finance_api
+    build: ./finance_api
     container_name: lr3-celery-beat
     restart: unless-stopped
-    command: celery -A app.celery_app:celery_app beat --loglevel=info
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/personal_finance_lab3
-      PARSER_SERVICE_URL: http://parser-service:8000
-      CELERY_BROKER_URL: redis://redis:6379/0
-      CELERY_RESULT_BACKEND: redis://redis:6379/0
-      SCHEDULED_PARSE_URL: https://www.imf.org/
+    command: celery -A app.celery_app:celery_app beat --loglevel=info --schedule=/tmp/celerybeat-schedule
+    environment: *finance-env
     depends_on:
-      - db
-      - parser-service
-      - redis
+      parser-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
   postgres_data:

@@ -1,0 +1,81 @@
+{
+  "measured_at": "2026-09-09T11:34:29.826880+00:00",
+  "python": "3.12.3",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+  "cpu_count": 4,
+  "workers": 4,
+  "runs": [
+    {
+      "program": "task1_threading.py",
+      "mode": "formula",
+      "limit": 10000000000000,
+      "returncode": 0,
+      "stdout": "Mode: formula; N: 10000000000000\nApproach: threading\nWorkers: 4\nTotal sum: 50000000000005000000000000\nDuration: 0.000776 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task1_multiprocessing.py",
+      "mode": "formula",
+      "limit": 10000000000000,
+      "returncode": 0,
+      "stdout": "Mode: formula; N: 10000000000000\nApproach: multiprocessing\nWorkers: 4\nTotal sum: 50000000000005000000000000\nDuration: 0.011718 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task1_async.py",
+      "mode": "formula",
+      "limit": 10000000000000,
+      "returncode": 0,
+      "stdout": "Mode: formula; N: 10000000000000\nApproach: asyncio\nWorkers: 4\nTotal sum: 50000000000005000000000000\nDuration: 0.000417 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task1_threading.py",
+      "mode": "loop",
+      "limit": 5000000,
+      "returncode": 0,
+      "stdout": "Mode: loop; N: 5000000\nApproach: threading\nWorkers: 4\nTotal sum: 12500002500000\nDuration: 0.290736 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task1_multiprocessing.py",
+      "mode": "loop",
+      "limit": 5000000,
+      "returncode": 0,
+      "stdout": "Mode: loop; N: 5000000\nApproach: multiprocessing\nWorkers: 4\nTotal sum: 12500002500000\nDuration: 0.083509 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task1_async.py",
+      "mode": "loop",
+      "limit": 5000000,
+      "returncode": 0,
+      "stdout": "Mode: loop; N: 5000000\nApproach: asyncio\nWorkers: 4\nTotal sum: 12500002500000\nDuration: 0.642521 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task2_threading.py",
+      "mode": "formula",
+      "limit": 10000000000000,
+      "returncode": 0,
+      "stdout": "[threading] 200 | https://www.cbr.ru/ | Центральный банк Российской Федерации | Банк России\n[threading] 200 | https://www.worldbank.org/ | World Bank Group - International Development, Poverty and Sustainability\n[threading] 200 | https://www.federalreserve.gov/ | Federal Reserve Board - Home\n[threading] 200 | https://www.bis.org/ | Welcome to the BIS | Bank for International Settlements\nApproach: threading\nSuccessful: 4; Failed: 0; Total: 4\nDuration: 0.652953 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task2_multiprocessing.py",
+      "mode": "formula",
+      "limit": 10000000000000,
+      "returncode": 0,
+      "stdout": "[multiprocessing] 200 | https://www.cbr.ru/ | Центральный банк Российской Федерации | Банк России\n[multiprocessing] 200 | https://www.federalreserve.gov/ | Federal Reserve Board - Home\n[multiprocessing] 200 | https://www.worldbank.org/ | World Bank Group - International Development, Poverty and Sustainability\n[multiprocessing] 200 | https://www.bis.org/ | Welcome to the BIS | Bank for International Settlements\nApproach: multiprocessing\nSuccessful: 4; Failed: 0; Total: 4\nDuration: 0.691513 seconds\n",
+      "stderr": ""
+    },
+    {
+      "program": "task2_async.py",
+      "mode": "formula",
+      "limit": 10000000000000,
+      "returncode": 0,
+      "stdout": "[async] 200 | https://www.federalreserve.gov/ | Federal Reserve Board - Home\n[async] 200 | https://www.cbr.ru/ | Центральный банк Российской Федерации | Банк России\n[async] 200 | https://www.worldbank.org/ | World Bank Group - International Development, Poverty and Sustainability\n[async] 200 | https://www.bis.org/ | Welcome to the BIS | Bank for International Settlements\nApproach: async\nSuccessful: 4; Failed: 0; Total: 4\nDuration: 0.639118 seconds\n",
+      "stderr": ""
+    }
+  ]
+}

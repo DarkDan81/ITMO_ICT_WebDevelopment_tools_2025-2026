@@ -1,12 +1,22 @@
-site_name: ITMO ICT Web Development Report
-site_description: Report materials for laboratory works
+site_name: Средства Web-программирования
+site_description: Лабораторные работы — Дущенко Даниил, К3341
+site_author: Дущенко Даниил
+site_url: https://darkdan.ru/web-labs/
 docs_dir: students/k3341/Dushchenko_Daniil/docs
-site_dir: students/k3341/Dushchenko_Daniil/site
+site_dir: docs
+hooks:
+  - tools/docs_hooks.py
 theme:
   name: mkdocs
-  language: ru
+  locale: ru
 nav:
   - Главная: index.md
-  - Лабораторная 1: lr1.md
-  - Лабораторная 2: lr2.md
-  - Лабораторная 3: lr3.md
+  - ЛР1: lr1.md
+  - Код ЛР1: lr1-code.md
+  - ЛР2: lr2.md
+  - Код ЛР2: lr2-code.md
+  - ЛР3: lr3.md
+  - Код ЛР3: lr3-code.md
+markdown_extensions:
+  - tables
+  - fenced_code

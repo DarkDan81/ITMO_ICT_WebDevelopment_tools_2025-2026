@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
-from pydantic import BaseModel, Field as PydanticField
+from pydantic import BaseModel, HttpUrl, Field as PydanticField
 from sqlmodel import Field, SQLModel
 
 
@@ -11,11 +11,11 @@ class ParsedPage(SQLModel, table=True):
     title: str = Field(max_length=500)
     fetch_method: str = Field(max_length=30, index=True)
     status_code: int
-    fetched_at: datetime = Field(default_factory=datetime.utcnow)
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
 
 
 class ParseRequest(BaseModel):
-    url: str = PydanticField(..., max_length=500)
+    url: HttpUrl = PydanticField(..., max_length=500)
 
 
 class ParseResponse(BaseModel):

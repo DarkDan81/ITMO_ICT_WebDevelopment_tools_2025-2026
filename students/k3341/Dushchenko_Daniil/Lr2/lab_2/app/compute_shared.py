@@ -12,13 +12,19 @@ class ComputeResult:
     duration: float
 
 
-def calculate_sum(start: int, end: int) -> int:
-    """Return the arithmetic progression sum for a chunk."""
+def calculate_sum(start: int, end: int, mode: str = "formula") -> int:
+    """Формула для 10^13; цикл — для сравнения CPU-bound работы."""
+    if mode == "loop":
+        total = 0
+        for number in range(start, end + 1):
+            total += number
+        return total
     count = end - start + 1
     return (start + end) * count // 2
 
 
 def split_range(limit: int, chunks: int) -> list[tuple[int, int]]:
+    chunks = min(limit, chunks)
     chunk_size = limit // chunks
     ranges: list[tuple[int, int]] = []
     start = 1

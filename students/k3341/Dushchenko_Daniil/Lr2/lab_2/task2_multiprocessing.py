@@ -1,38 +1,24 @@
-from multiprocessing import Pool, cpu_count
-
-import requests
-
-from app.config import DEFAULT_WORKERS, URLS
-from app.parse_shared import (
-    extract_title,
-    print_page_result,
-    print_parse_result,
-    reset_results,
-    save_page_result,
-    timed_parse_run,
-)
-
-FETCH_METHOD = "multiprocessing"
+from multiprocessing import Pool
+from app.config import DEFAULT_WORKERS, URLS, split_items
+from app.parsing import fetch_and_save, run_and_print
 
 
-def parse_and_save(url: str) -> int:
-    response = requests.get(url, timeout=20)
-    title = extract_title(response.text)
-    save_page_result(url, title, response.status_code, FETCH_METHOD)
-    print_page_result(url, title, response.status_code, FETCH_METHOD)
-    return 1
+def parse_and_save(url: str) -> bool:
+    return fetch_and_save(url, "multiprocessing")
+
+
+def process_chunk(urls: list[str]) -> int:
+    return sum(parse_and_save(url) for url in urls)
 
 
 def main() -> None:
-    reset_results(FETCH_METHOD)
-    workers = min(DEFAULT_WORKERS, cpu_count(), len(URLS))
+    chunks = split_items(URLS, DEFAULT_WORKERS)
 
     def runner() -> int:
-        with Pool(processes=workers) as pool:
-            return sum(pool.map(parse_and_save, URLS))
+        with Pool(processes=len(chunks)) as pool:
+            return sum(pool.map(process_chunk, chunks))
 
-    result = timed_parse_run(FETCH_METHOD, runner)
-    print_parse_result(result)
+    run_and_print("multiprocessing", len(URLS), runner)
 
 
 if __name__ == "__main__":

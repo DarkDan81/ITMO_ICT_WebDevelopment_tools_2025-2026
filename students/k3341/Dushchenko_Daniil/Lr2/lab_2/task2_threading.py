@@ -1,38 +1,28 @@
-from concurrent.futures import ThreadPoolExecutor
-
-import requests
-
-from app.config import DEFAULT_WORKERS, URLS
-from app.parse_shared import (
-    extract_title,
-    print_page_result,
-    print_parse_result,
-    reset_results,
-    save_page_result,
-    timed_parse_run,
-)
-
-FETCH_METHOD = "threading"
+import threading
+from app.config import DEFAULT_WORKERS, URLS, split_items
+from app.parsing import fetch_and_save, run_and_print
 
 
-def parse_and_save(url: str) -> int:
-    response = requests.get(url, timeout=20)
-    title = extract_title(response.text)
-    save_page_result(url, title, response.status_code, FETCH_METHOD)
-    print_page_result(url, title, response.status_code, FETCH_METHOD)
-    return 1
+def parse_and_save(url: str) -> bool:
+    return fetch_and_save(url, "threading")
 
 
 def main() -> None:
-    reset_results(FETCH_METHOD)
-    workers = min(DEFAULT_WORKERS, len(URLS))
+    chunks = split_items(URLS, DEFAULT_WORKERS)
+    results = [0] * len(chunks)
+
+    def worker(index: int, urls: list[str]) -> None:
+        results[index] = sum(parse_and_save(url) for url in urls)
 
     def runner() -> int:
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            return sum(executor.map(parse_and_save, URLS))
+        threads = [threading.Thread(target=worker, args=(i, urls)) for i, urls in enumerate(chunks)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        return sum(results)
 
-    result = timed_parse_run(FETCH_METHOD, runner)
-    print_parse_result(result)
+    run_and_print("threading", len(URLS), runner)
 
 
 if __name__ == "__main__":

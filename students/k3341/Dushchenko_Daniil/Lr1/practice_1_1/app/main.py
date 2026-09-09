@@ -80,6 +80,9 @@ def find_category_index(category_id: int) -> int | None:
 
 
 def build_operation(operation_in: OperationCreate, operation_id: int) -> Operation:
+    category_index = find_category_index(operation_in.category.id)
+    if category_index is None:
+        raise HTTPException(400, "Category does not exist")
     next_tag_id = get_next_tag_id()
     tags = []
     for offset, tag in enumerate(operation_in.tags):
@@ -91,7 +94,7 @@ def build_operation(operation_in: OperationCreate, operation_id: int) -> Operati
         amount=operation_in.amount,
         operation_type=operation_in.operation_type,
         operation_date=operation_in.operation_date,
-        category=operation_in.category,
+        category=categories_db[category_index],
         tags=tags,
         description=operation_in.description,
     )

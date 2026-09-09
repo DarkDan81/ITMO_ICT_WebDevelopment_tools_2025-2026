@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="author" content="Дущенко Даниил">
+        <link rel="canonical" href="https://darkdan.ru/web-labs/lr3/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>ЛР3 - Средства Web-программирования</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Средства Web-программирования</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1/" class="nav-link">ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1-code/" class="nav-link">Код ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2/" class="nav-link">ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2-code/" class="nav-link">Код ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">ЛР3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr3-code/" class="nav-link">Код ЛР3</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../lr2-code/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../lr3-code/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+
+            <li class="nav-item" data-bs-level="1"><a href="#3-docker" class="nav-link">Лабораторная работа 3. Docker и очередь задач</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">Контейнеры</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">Вызов парсера</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">Запуск</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_4" class="nav-link">Периодическая задача и проверка</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_5" class="nav-link">Вывод</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="3-docker">Лабораторная работа 3. Docker и очередь задач</h1>
+<p><strong>Дущенко Даниил, К3341.</strong> Использованы API из ЛР1 и парсер финансовых сайтов из ЛР2.</p>
+<h2 id="_1">Контейнеры</h2>
+<table>
+<thead>
+<tr>
+<th>Сервис</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db</td>
+<td>PostgreSQL 16 и постоянный том с данными</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>Брокер Celery и хранилище результатов на 24 часа</td>
+</tr>
+<tr>
+<td>migrate</td>
+<td>Однократное применение миграций перед запуском API</td>
+</tr>
+<tr>
+<td>finance-api</td>
+<td>API ЛР3 с HTTP-вызовом парсера и постановкой в очередь</td>
+</tr>
+<tr>
+<td>parser-service</td>
+<td>Получение HTML, извлечение первого title, запись в ParsedPage</td>
+</tr>
+<tr>
+<td>celery-worker</td>
+<td>Выполнение задач парсинга; два рабочих процесса</td>
+</tr>
+<tr>
+<td>celery-beat</td>
+<td>Отправка периодической задачи каждые шесть часов</td>
+</tr>
+<tr>
+<td>lr1-api</td>
+<td>Отдельный запуск итоговой ЛР1 с той же финансовой БД</td>
+</tr>
+</tbody>
+</table>
+<p>Для приложений созданы Dockerfile на Python 3.12. Docker Compose связывает сервисы внутренней сетью.
+API запускаются после успешной миграции, готовности PostgreSQL и парсера.
+У контейнера migrate состояние Exited (0) нормально: после обновления схемы его работа завершена.</p>
+<h2 id="_2">Вызов парсера</h2>
+<p><code>POST /parser/parse-sync</code> принимает <code>{"url": "https://www.worldbank.org/"}</code>.
+Основной API отправляет HTTP-запрос в отдельный контейнер parser-service на <code>POST /parse</code>.
+Парсер извлекает заголовок, сохраняет его в PostgreSQL и возвращает результат.</p>
+<p><code>POST /parser/parse-async</code> возвращает 202 и task_id. Celery получает задание через Redis,
+вызывает тот же HTTP-сервис и сохраняет результат в Redis.
+<code>GET /parser/tasks/{task_id}</code> возвращает состояние PENDING, STARTED, RETRY, SUCCESS или FAILURE.
+Статус и результат доступны пользователю, который создал задание.
+При сетевом сбое выполняются не более двух повторных попыток; ошибка видна в ответе проверки статуса.</p>
+<p>Внешние запросы ограничены тайм-аутами. Разрешены публичные HTTP/HTTPS-адреса, размер страницы до 2 МБ.
+HTTP-ошибки и отсутствие title не записываются как успешный результат.
+Таблица ParsedPage хранит URL, источник, заголовок, способ загрузки, HTTP-статус и время.</p>
+<h2 id="_3">Запуск</h2>
+<p>Из папки <code>Lr3</code>:</p>
+<pre><code class="language-bash">python prepare_env.py
+docker compose up -d --build
+docker compose ps
+</code></pre>
+<p><code>prepare_env.py</code> создаёт <code>.env</code> с новым ключом JWT и не перезаписывает существующие настройки.</p>
+<table>
+<thead>
+<tr>
+<th>Приложение</th>
+<th>Локальный адрес</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ЛР3</td>
+<td>http://127.0.0.1:8000/docs</td>
+</tr>
+<tr>
+<td>Парсер</td>
+<td>http://127.0.0.1:8001/docs</td>
+</tr>
+<tr>
+<td>ЛР1</td>
+<td>http://127.0.0.1:8011/docs</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>127.0.0.1:5434</td>
+</tr>
+</tbody>
+</table>
+<p>Зарегистрировать пользователя через <code>/auth/register</code>, затем войти кнопкой Authorize в Swagger.
+Для полного сценария проверки:</p>
+<pre><code class="language-bash">pip install requests
+python verify_server.py --api http://127.0.0.1:8000
+python verify_server.py --api http://127.0.0.1:8011 --without-parser
+</code></pre>
+<p>Скрипт проверяет регистрацию, JWT, операции, месячный отчёт, прямой и фоновый вызов парсера.
+Созданные им пользователь, операция, категория и тег удаляются в конце; результаты парсинга остаются.</p>
+<h2 id="_4">Периодическая задача и проверка</h2>
+<p>Адрес задаётся через SCHEDULED_PARSE_URL (по умолчанию World Bank), интервал — PARSE_INTERVAL_SECONDS (21600).
+На сервере 09.09.2026 проверены синхронный запрос и задача Celery: оба завершились успешно и записали данные.
+Для проверки таймера интервал временно уменьшался до 60 секунд: Beat отправил задание, worker выполнил его
+со статусом SUCCESS. После проверки установлен обычный интервал шесть часов.</p>
+<p>ЛР1 и ЛР3 работают на сервере в контейнерах с автоматическим перезапуском.
+Адреса Swagger на сервере: <code>/web-labs/api/lr1/docs</code> и <code>/web-labs/api/lr3/docs</code> на darkdan.ru.
+Перед доступом действует существующий вход на сайт, а внутри API — регистрация и JWT лабораторной.</p>
+<h2 id="_5">Вывод</h2>
+<p>Реализованы все три подзадачи: контейнеризация, взаимодействие через HTTP и очередь Celery/Redis.
+Отдельный worker позволяет вернуть пользователю task_id сразу, не дожидаясь загрузки страницы.
+Дополнительно проверен периодический запуск через Celery Beat.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

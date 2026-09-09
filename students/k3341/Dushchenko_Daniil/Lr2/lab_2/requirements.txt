@@ -1,5 +1,7 @@
-sqlmodel
-psycopg2-binary
-python-dotenv
-requests
-aiohttp
+sqlmodel>=0.0.22,<0.1
+psycopg2-binary>=2.9,<3
+python-dotenv>=1,<2
+requests>=2.32,<3
+aiohttp>=3.11,<4
+certifi
+charset-normalizer>=3,<4

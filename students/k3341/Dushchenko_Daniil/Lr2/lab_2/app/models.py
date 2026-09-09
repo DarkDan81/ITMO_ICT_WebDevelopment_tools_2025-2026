@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlmodel import Field, SQLModel
 
@@ -10,4 +10,4 @@ class ParsedPage(SQLModel, table=True):
     title: str = Field(max_length=500)
     fetch_method: str = Field(max_length=30, index=True)
     status_code: int
-    fetched_at: datetime = Field(default_factory=datetime.utcnow)
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None))

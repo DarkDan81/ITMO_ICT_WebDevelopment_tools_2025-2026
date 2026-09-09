@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="author" content="Дущенко Даниил">
+        <link rel="canonical" href="https://darkdan.ru/web-labs/lr3-code/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Код ЛР3 - Средства Web-программирования</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Средства Web-программирования</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1/" class="nav-link">ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1-code/" class="nav-link">Код ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2/" class="nav-link">ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2-code/" class="nav-link">Код ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr3/" class="nav-link">ЛР3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Код ЛР3</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../lr3/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+
+            <li class="nav-item" data-bs-level="1"><a href="#lr3" class="nav-link">Исходный код LR3</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#lr3parser_serviceappdbpy" class="nav-link">Lr3/parser_service/app/db.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3parser_serviceappmainpy" class="nav-link">Lr3/parser_service/app/main.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3parser_serviceappmodelspy" class="nav-link">Lr3/parser_service/app/models.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3parser_serviceappservicespy" class="nav-link">Lr3/parser_service/app/services.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappcelery_apppy" class="nav-link">Lr3/finance_api/app/celery_app.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappdbpy" class="nav-link">Lr3/finance_api/app/db.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappfinancepy" class="nav-link">Lr3/finance_api/app/finance.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappmainpy" class="nav-link">Lr3/finance_api/app/main.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappmodelspy" class="nav-link">Lr3/finance_api/app/models.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappparser_clientpy" class="nav-link">Lr3/finance_api/app/parser_client.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappparser_modelspy" class="nav-link">Lr3/finance_api/app/parser_models.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappparser_routespy" class="nav-link">Lr3/finance_api/app/parser_routes.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappreportspy" class="nav-link">Lr3/finance_api/app/reports.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappsecuritypy" class="nav-link">Lr3/finance_api/app/security.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiapptaskspy" class="nav-link">Lr3/finance_api/app/tasks.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apiappuserspy" class="nav-link">Lr3/finance_api/app/users.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3docker-composeyml" class="nav-link">Lr3/docker-compose.yml</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3finance_apidockerfile" class="nav-link">Lr3/finance_api/Dockerfile</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr3parser_servicedockerfile" class="nav-link">Lr3/parser_service/Dockerfile</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lr3">Исходный код LR3</h1>
+<p>Код соответствует текущим файлам проекта.</p>
+<h2 id="lr3parser_serviceappdbpy">Lr3/parser_service/app/db.py</h2>
+<pre><code class="language-python">import os
+
+from dotenv import load_dotenv
+from sqlmodel import Session, SQLModel, create_engine
+
+load_dotenv()
+
+DATABASE_URL = os.getenv(
+    &quot;DATABASE_URL&quot;,
+    &quot;postgresql://postgres:postgres@db:5432/personal_finance_lab3&quot;,
+)
+
+engine = create_engine(DATABASE_URL, echo=False)
+
+
+def init_db() -&gt; None:
+    SQLModel.metadata.create_all(engine)
+
+
+def get_session() -&gt; Session:
+    return Session(engine)
+</code></pre>
+<h2 id="lr3parser_serviceappmainpy">Lr3/parser_service/app/main.py</h2>
+<pre><code class="language-python">import os
+import socket
+from fastapi import FastAPI, HTTPException, status
+from requests import RequestException, Timeout
+
+from app.db import get_session, init_db
+from sqlalchemy import text
+from app.models import ParseRequest, ParseResponse
+from app.services import parse_url_and_save
+
+app = FastAPI(
+    title=&quot;Personal Finance Parser Service&quot;,
+    description=&quot;HTTP parser service for Docker-based laboratory work 3.&quot;,
+    version=&quot;2.0.0&quot;,
+    root_path=os.getenv(&quot;ROOT_PATH&quot;, &quot;&quot;),
+)
+
+
+@app.on_event(&quot;startup&quot;)
+def on_startup() -&gt; None:
+    init_db()
+
+
+@app.get(&quot;/health&quot;)
+def healthcheck() -&gt; dict:
+    with get_session() as session:
+        session.exec(text(&quot;SELECT 1&quot;))
+    return {&quot;status&quot;: &quot;ok&quot;, &quot;service&quot;: &quot;parser-service&quot;}
+
+
+@app.post(&quot;/parse&quot;, response_model=ParseResponse, status_code=status.HTTP_201_CREATED)
+def parse(payload: ParseRequest) -&gt; ParseResponse:
+    try:
+        with get_session() as session:
+            page = parse_url_and_save(str(payload.url), session)
+    except Timeout as exc:
+        raise HTTPException(504, &quot;Сайт не ответил вовремя&quot;) from exc
+    except (ValueError, socket.gaierror) as exc:
+        raise HTTPException(400, str(exc)) from exc
+    except RequestException as exc:
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail=f&quot;Parser request failed: {exc}&quot;,
+        ) from exc
+
+    return ParseResponse(
+        message=&quot;Parsing completed&quot;,
+        url=page.url,
+        title=page.title,
+        source_name=page.source_name,
+        status_code=page.status_code,
+        fetch_method=page.fetch_method,
+    )
+</code></pre>
+<h2 id="lr3parser_serviceappmodelspy">Lr3/parser_service/app/models.py</h2>
+<pre><code class="language-python">from datetime import datetime, timezone
+
+from pydantic import BaseModel, HttpUrl, Field as PydanticField
+from sqlmodel import Field, SQLModel
+
+
+class ParsedPage(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    url: str = Field(index=True, max_length=500)
+    source_name: str = Field(max_length=100)
+    title: str = Field(max_length=500)
+    fetch_method: str = Field(max_length=30, index=True)
+    status_code: int
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+
+
+class ParseRequest(BaseModel):
+    url: HttpUrl = PydanticField(..., max_length=500)
+
+
+class ParseResponse(BaseModel):
+    message: str
+    url: str
+    title: str
+    source_name: str
+    status_code: int
+    fetch_method: str
+</code></pre>
+<h2 id="lr3parser_serviceappservicespy">Lr3/parser_service/app/services.py</h2>
+<pre><code class="language-python">import ipaddress
+import socket
+from html.parser import HTMLParser
+from urllib.parse import urlparse, urljoin
+
+import requests
+from charset_normalizer import from_bytes
+from sqlmodel import Session
+from app.models import ParsedPage
+
+
+class TitleParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.inside = False
+        self.done = False
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == &quot;title&quot; and not self.done:
+            self.inside = True
+
+    def handle_endtag(self, tag):
+        if tag == &quot;title&quot; and self.inside:
+            self.inside = False
+            self.done = True
+
+    def handle_data(self, data):
+        if self.inside:
+            self.parts.append(data)
+
+
+def validate_public_url(url: str) -&gt; None:
+    parsed = urlparse(url)
+    if parsed.scheme not in {&quot;http&quot;, &quot;https&quot;} or not parsed.hostname or parsed.username or parsed.password:
+        raise ValueError(&quot;Нужен публичный HTTP/HTTPS URL без логина и пароля&quot;)
+    if parsed.port not in {None, 80, 443}:
+        raise ValueError(&quot;Разрешены порты 80 и 443&quot;)
+    addresses = socket.getaddrinfo(parsed.hostname, parsed.port or 443)
+    if not addresses or any(not ipaddress.ip_address(item[4][0]).is_global for item in addresses):
+        raise ValueError(&quot;Внутренние адреса не поддерживаются&quot;)
+
+
+def parse_url_and_save(url: str, session: Session) -&gt; ParsedPage:
+    current = url
+    for _ in range(6):
+        validate_public_url(current)
+        with requests.get(current, timeout=(3, 12), allow_redirects=False, stream=True) as response:
+            if response.is_redirect:
+                current = urljoin(current, response.headers[&quot;Location&quot;])
+                continue
+            response.raise_for_status()
+            content = bytearray()
+            for chunk in response.iter_content(65536):
+                content.extend(chunk)
+                if len(content) &gt; 2_000_000:
+                    raise ValueError(&quot;Страница больше 2 МБ&quot;)
+            decoded = from_bytes(bytes(content)).best()
+            parser = TitleParser()
+            parser.feed(str(decoded) if decoded is not None else content.decode(&quot;utf-8&quot;, errors=&quot;replace&quot;))
+            title = &quot; &quot;.join(&quot;&quot;.join(parser.parts).split())
+            if not title:
+                raise ValueError(&quot;На странице нет title&quot;)
+            page = ParsedPage(url=url, source_name=(urlparse(url).hostname or &quot;unknown&quot;)[:100],
+                              title=title[:500], fetch_method=&quot;docker-http-parser&quot;, status_code=response.status_code)
+            session.add(page)
+            session.commit()
+            session.refresh(page)
+            return page
+    raise ValueError(&quot;Слишком много перенаправлений&quot;)
+</code></pre>
+<h2 id="lr3finance_apiappcelery_apppy">Lr3/finance_api/app/celery_app.py</h2>
+<pre><code class="language-python">import os
+
+from celery import Celery
+
+CELERY_BROKER_URL = os.getenv(&quot;CELERY_BROKER_URL&quot;, &quot;redis://redis:6379/0&quot;)
+CELERY_RESULT_BACKEND = os.getenv(&quot;CELERY_RESULT_BACKEND&quot;, CELERY_BROKER_URL)
+SCHEDULED_PARSE_URL = os.getenv(&quot;SCHEDULED_PARSE_URL&quot;, &quot;https://www.worldbank.org/&quot;)
+
+celery_app = Celery(
+    &quot;finance_parser_tasks&quot;,
+    broker=CELERY_BROKER_URL,
+    backend=CELERY_RESULT_BACKEND,
+    include=[&quot;app.tasks&quot;],
+)
+
+celery_app.conf.update(
+    task_serializer=&quot;json&quot;,
+    result_serializer=&quot;json&quot;,
+    accept_content=[&quot;json&quot;],
+    timezone=&quot;Europe/Moscow&quot;,
+    enable_utc=True,
+    result_expires=86400,
+    task_track_started=True,
+    task_soft_time_limit=50,
+    task_time_limit=60,
+    broker_connection_retry_on_startup=True,
+    beat_schedule={
+        &quot;scheduled-parser-health-check&quot;: {
+            &quot;task&quot;: &quot;app.tasks.parse_url_task&quot;,
+            &quot;schedule&quot;: int(os.getenv(&quot;PARSE_INTERVAL_SECONDS&quot;, &quot;21600&quot;)),
+            &quot;args&quot;: (SCHEDULED_PARSE_URL,),
+        }
+    },
+)
+</code></pre>
+<h2 id="lr3finance_apiappdbpy">Lr3/finance_api/app/db.py</h2>
+<pre><code class="language-python">import os
+
+from dotenv import load_dotenv
+from sqlmodel import Session, SQLModel, create_engine
+
+load_dotenv()
+
+DATABASE_URL = os.getenv(
+    &quot;DATABASE_URL&quot;,
+    &quot;postgresql://postgres@localhost:5432/personal_finance_practice_3_db&quot;,
+)
+
+engine = create_engine(DATABASE_URL, echo=False)
+
+
+def init_db() -&gt; None:
+    SQLModel.metadata.create_all(engine)
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+</code></pre>
+<h2 id="lr3finance_apiappfinancepy">Lr3/finance_api/app/finance.py</h2>
+<pre><code class="language-python">from fastapi import APIRouter, Depends, HTTPException, Response
+from sqlalchemy.exc import IntegrityError
+from sqlmodel import Session, select
+
+from app.db import get_session
+from app.models import (Category, CategoryCreate, CategoryRead, CategoryReadWithUser, CategoryUpdate,
+                        Operation, OperationCreate, OperationReadWithRelations, OperationTagLink,
+                        OperationUpdate, Tag, TagCreate, TagRead, TagReadWithMetadata, TagUpdate, User, UserRead)
+from app.security import get_current_user
+
+router = APIRouter(tags=[&quot;Финансы&quot;])
+
+
+def owned(model, item_id: int, user: User, session: Session):
+    item = session.get(model, item_id)
+    if item is None or item.user_id != user.id:
+        raise HTTPException(404, &quot;Запись не найдена&quot;)
+    return item
+
+
+def check_owner(user_id: int | None, user: User) -&gt; None:
+    if user_id is not None and user_id != user.id:
+        raise HTTPException(403, &quot;Нельзя указать другого владельца&quot;)
+
+
+def check_tags(assignments, session: Session) -&gt; None:
+    for assignment in assignments:
+        if session.get(Tag, assignment.tag_id) is None:
+            raise HTTPException(400, f&quot;Тег {assignment.tag_id} не найден&quot;)
+
+
+def set_tags(operation: Operation, assignments, session: Session) -&gt; None:
+    for link in session.exec(select(OperationTagLink).where(OperationTagLink.operation_id == operation.id)).all():
+        session.delete(link)
+    session.flush()
+    for tag in assignments:
+        session.add(OperationTagLink(operation_id=operation.id, tag_id=tag.tag_id, priority=tag.priority))
+
+
+def serialize_operation(operation: Operation, session: Session) -&gt; OperationReadWithRelations:
+    links = session.exec(select(OperationTagLink).where(OperationTagLink.operation_id == operation.id)).all()
+    tags = []
+    for link in links:
+        tag = session.get(Tag, link.tag_id)
+        tags.append(TagReadWithMetadata(id=tag.id, name=tag.name, assigned_at=link.assigned_at, priority=link.priority))
+    return OperationReadWithRelations(
+        **operation.model_dump(), user=UserRead.model_validate(operation.user),
+        category=CategoryRead.model_validate(operation.category), tags=tags,
+    )
+
+
+@router.get(&quot;/categories&quot;, response_model=list[CategoryRead])
+def categories(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[Category]:
+    return list(session.exec(select(Category).where(Category.user_id == user.id)).all())
+
+
+@router.get(&quot;/categories/{category_id}&quot;, response_model=CategoryReadWithUser)
+def category(category_id: int, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Category:
+    return owned(Category, category_id, user, session)
+
+
+@router.post(&quot;/categories&quot;, response_model=CategoryRead, status_code=201)
+def create_category(data: CategoryCreate, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Category:
+    check_owner(data.user_id, user)
+    item = Category.model_validate(data.model_dump() | {&quot;user_id&quot;: user.id})
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
+
+
+@router.patch(&quot;/categories/{category_id}&quot;, response_model=CategoryRead)
+def update_category(category_id: int, data: CategoryUpdate, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Category:
+    item = owned(Category, category_id, user, session)
+    check_owner(data.user_id, user)
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(item, key, value)
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
+
+
+@router.delete(&quot;/categories/{category_id}&quot;, status_code=204)
+def delete_category(category_id: int, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Response:
+    item = owned(Category, category_id, user, session)
+    if item.operations:
+        raise HTTPException(409, &quot;Категория используется в операциях&quot;)
+    session.delete(item)
+    session.commit()
+    return Response(status_code=204)
+
+
+# Теги — общий справочник. Личные суммы и категории доступны только владельцу.
+@router.get(&quot;/tags&quot;, response_model=list[TagRead])
+def tags(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[Tag]:
+    return list(session.exec(select(Tag)).all())
+
+
+def get_tag(tag_id: int, session: Session) -&gt; Tag:
+    item = session.get(Tag, tag_id)
+    if item is None:
+        raise HTTPException(404, &quot;Тег не найден&quot;)
+    return item
+
+
+@router.get(&quot;/tags/{tag_id}&quot;, response_model=TagRead)
+def tag(tag_id: int, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Tag:
+    return get_tag(tag_id, session)
+
+
+def save_tag(item: Tag, session: Session) -&gt; Tag:
+    session.add(item)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(409, &quot;Тег с таким именем уже существует&quot;)
+    session.refresh(item)
+    return item
+
+
+@router.post(&quot;/tags&quot;, response_model=TagRead, status_code=201)
+def create_tag(data: TagCreate, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Tag:
+    return save_tag(Tag.model_validate(data), session)
+
+
+@router.patch(&quot;/tags/{tag_id}&quot;, response_model=TagRead)
+def update_tag(tag_id: int, data: TagUpdate, user: User = Depends(get_current_user),
+               session: Session = Depends(get_session)) -&gt; Tag:
+    item = get_tag(tag_id, session)
+    if any(operation.user_id != user.id for operation in item.operations):
+        raise HTTPException(409, &quot;Тег используется другим пользователем&quot;)
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(item, key, value)
+    return save_tag(item, session)
+
+
+@router.delete(&quot;/tags/{tag_id}&quot;, status_code=204)
+def delete_tag(tag_id: int, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Response:
+    item = get_tag(tag_id, session)
+    if item.operations:
+        raise HTTPException(409, &quot;Тег используется в операциях&quot;)
+    session.delete(item)
+    session.commit()
+    return Response(status_code=204)
+
+
+@router.get(&quot;/operations&quot;, response_model=list[OperationReadWithRelations])
+def operations(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[OperationReadWithRelations]:
+    items = session.exec(select(Operation).where(Operation.user_id == user.id)).all()
+    return [serialize_operation(item, session) for item in items]
+
+
+@router.get(&quot;/operations/{operation_id}&quot;, response_model=OperationReadWithRelations)
+def operation(operation_id: int, user: User = Depends(get_current_user),
+              session: Session = Depends(get_session)) -&gt; OperationReadWithRelations:
+    return serialize_operation(owned(Operation, operation_id, user, session), session)
+
+
+@router.post(&quot;/operations&quot;, response_model=OperationReadWithRelations, status_code=201)
+def create_operation(data: OperationCreate, user: User = Depends(get_current_user),
+                     session: Session = Depends(get_session)) -&gt; OperationReadWithRelations:
+    check_owner(data.user_id, user)
+    if data.category_id is None:
+        raise HTTPException(422, &quot;Нужно указать category_id&quot;)
+    owned(Category, data.category_id, user, session)
+    check_tags(data.tags, session)
+    item = Operation.model_validate(data.model_dump(exclude={&quot;tags&quot;}) | {&quot;user_id&quot;: user.id})
+    session.add(item)
+    session.flush()  # Получаем id, но ещё не фиксируем операцию.
+    set_tags(item, data.tags, session)
+    session.commit()  # Операция и её теги сохраняются вместе.
+    session.refresh(item)
+    return serialize_operation(item, session)
+
+
+@router.patch(&quot;/operations/{operation_id}&quot;, response_model=OperationReadWithRelations)
+def update_operation(operation_id: int, data: OperationUpdate, user: User = Depends(get_current_user),
+                     session: Session = Depends(get_session)) -&gt; OperationReadWithRelations:
+    item = owned(Operation, operation_id, user, session)
+    check_owner(data.user_id, user)
+    if data.category_id is not None:
+        owned(Category, data.category_id, user, session)
+    if data.tags is not None:
+        check_tags(data.tags, session)
+    for key, value in data.model_dump(exclude_unset=True, exclude={&quot;tags&quot;}).items():
+        setattr(item, key, value)
+    session.add(item)
+    if data.tags is not None:
+        set_tags(item, data.tags, session)
+    session.commit()
+    session.refresh(item)
+    return serialize_operation(item, session)
+
+
+@router.delete(&quot;/operations/{operation_id}&quot;, status_code=204)
+def delete_operation(operation_id: int, user: User = Depends(get_current_user),
+                     session: Session = Depends(get_session)) -&gt; Response:
+    item = owned(Operation, operation_id, user, session)
+    item.tags = []
+    session.delete(item)
+    session.commit()
+    return Response(status_code=204)
+</code></pre>
+<h2 id="lr3finance_apiappmainpy">Lr3/finance_api/app/main.py</h2>
+<pre><code class="language-python">import os
+from fastapi import FastAPI, Depends
+from sqlalchemy import text
+from sqlmodel import Session
+
+from app.db import get_session
+from app.users import router as users_router
+from app.finance import router as finance_router
+from app.reports import router as reports_router
+
+app = FastAPI(title=&quot;Личные финансы — ЛР3&quot;, version=&quot;2.0.0&quot;, root_path=os.getenv(&quot;ROOT_PATH&quot;, &quot;&quot;))
+app.include_router(users_router)
+app.include_router(finance_router)
+app.include_router(reports_router)
+
+
+@app.get(&quot;/&quot;)
+def index() -&gt; dict[str, str]:
+    return {&quot;message&quot;: &quot;Сервис личных финансов&quot;, &quot;docs&quot;: &quot;docs&quot;}
+
+
+@app.get(&quot;/health&quot;)
+def health(session: Session = Depends(get_session)) -&gt; dict[str, str]:
+    session.exec(text(&quot;SELECT 1&quot;))
+    return {&quot;status&quot;: &quot;ok&quot;}
+
+from app.parser_routes import router as parser_router
+app.include_router(parser_router)
+</code></pre>
+<h2 id="lr3finance_apiappmodelspy">Lr3/finance_api/app/models.py</h2>
+<pre><code class="language-python">from datetime import datetime, timezone
+from enum import Enum
+
+from pydantic import BaseModel, ConfigDict, EmailStr, Field as PydanticField, model_validator
+from sqlmodel import Field, Relationship, SQLModel
+
+
+class AppModel(SQLModel):
+    model_config = ConfigDict(allow_inf_nan=False, str_strip_whitespace=True)
+
+
+class OperationType(str, Enum):
+    income = &quot;income&quot;
+    expense = &quot;expense&quot;
+
+
+class UpdateModel(AppModel):
+    @model_validator(mode=&quot;before&quot;)
+    @classmethod
+    def reject_null_required(cls, values):
+        nullable = {&quot;description&quot;, &quot;monthly_limit&quot;, &quot;priority&quot;}
+        if isinstance(values, dict):
+            for key, value in values.items():
+                if value is None and key not in nullable:
+                    raise ValueError(f&quot;{key} не может быть null&quot;)
+        return values
+
+
+class UserBase(AppModel):
+    email: str = Field(index=True, unique=True, max_length=255)
+    full_name: str = Field(min_length=1, max_length=100)
+
+
+class User(UserBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    hashed_password: str | None = Field(default=None, max_length=255)
+    token_version: int = Field(default=0)
+    categories: list[&quot;Category&quot;] = Relationship(back_populates=&quot;user&quot;)
+    operations: list[&quot;Operation&quot;] = Relationship(back_populates=&quot;user&quot;)
+
+
+class UserCreate(UserBase):
+    email: EmailStr
+    password: str = PydanticField(min_length=8, max_length=128)
+
+
+class UserUpdate(UpdateModel):
+    email: EmailStr | None = None
+    full_name: str | None = Field(default=None, min_length=1, max_length=100)
+
+
+class CategoryBase(AppModel):
+    name: str = Field(min_length=1, max_length=50)
+    monthly_limit: float | None = Field(default=None, ge=0)
+    user_id: int | None = Field(default=None, foreign_key=&quot;user.id&quot;)
+
+
+class Category(CategoryBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user: User | None = Relationship(back_populates=&quot;categories&quot;)
+    operations: list[&quot;Operation&quot;] = Relationship(back_populates=&quot;category&quot;)
+
+
+class CategoryCreate(CategoryBase):
+    pass
+
+
+class CategoryUpdate(UpdateModel):
+    name: str | None = Field(default=None, min_length=1, max_length=50)
+    monthly_limit: float | None = Field(default=None, ge=0)
+    user_id: int | None = None
+
+
+class TagBase(AppModel):
+    name: str = Field(min_length=1, max_length=30, unique=True)
+
+
+class OperationTagLink(SQLModel, table=True):
+    operation_id: int | None = Field(
+        default=None,
+        foreign_key=&quot;operation.id&quot;,
+        primary_key=True,
+    )
+    tag_id: int | None = Field(default=None, foreign_key=&quot;tag.id&quot;, primary_key=True)
+    assigned_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+    priority: int | None = Field(default=None, ge=1, le=5)
+
+
+class Tag(TagBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    operations: list[&quot;Operation&quot;] = Relationship(
+        back_populates=&quot;tags&quot;,
+        link_model=OperationTagLink,
+    )
+
+
+class TagCreate(TagBase):
+    pass
+
+
+class TagUpdate(UpdateModel):
+    name: str | None = Field(default=None, min_length=1, max_length=30)
+
+
+class OperationBase(AppModel):
+    title: str = Field(min_length=1, max_length=100)
+    amount: float = Field(gt=0)
+    operation_type: OperationType
+    operation_date: datetime
+    description: str | None = Field(default=None, max_length=255)
+    user_id: int | None = Field(default=None, foreign_key=&quot;user.id&quot;)
+    category_id: int | None = Field(default=None, foreign_key=&quot;category.id&quot;)
+
+
+class Operation(OperationBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user: User | None = Relationship(back_populates=&quot;operations&quot;)
+    category: Category | None = Relationship(back_populates=&quot;operations&quot;)
+    tags: list[Tag] = Relationship(
+        back_populates=&quot;operations&quot;,
+        link_model=OperationTagLink,
+    )
+
+
+class OperationTagAssignment(AppModel):
+    tag_id: int
+    priority: int | None = Field(default=None, ge=1, le=5)
+
+
+class OperationCreate(OperationBase):
+    @model_validator(mode=&quot;after&quot;)
+    def unique_tags(self):
+        ids = [tag.tag_id for tag in self.tags]
+        if len(ids) != len(set(ids)):
+            raise ValueError(&quot;Тег не должен повторяться&quot;)
+        return self
+
+    tags: list[OperationTagAssignment] = PydanticField(default_factory=list)
+
+
+class OperationUpdate(UpdateModel):
+    @model_validator(mode=&quot;after&quot;)
+    def unique_tags(self):
+        ids = [tag.tag_id for tag in (self.tags or [])]
+        if len(ids) != len(set(ids)):
+            raise ValueError(&quot;Тег не должен повторяться&quot;)
+        return self
+
+    title: str | None = Field(default=None, min_length=1, max_length=100)
+    amount: float | None = Field(default=None, gt=0)
+    operation_type: OperationType | None = None
+    operation_date: datetime | None = None
+    description: str | None = Field(default=None, max_length=255)
+    user_id: int | None = None
+    category_id: int | None = None
+    tags: list[OperationTagAssignment] | None = None
+
+
+class CategoryRead(CategoryBase):
+    id: int
+
+
+class TagRead(TagBase):
+    id: int
+
+
+class UserRead(UserBase):
+    id: int
+
+
+class UserReadWithRelations(UserRead):
+    categories: list[CategoryRead] = PydanticField(default_factory=list)
+
+
+class CategoryReadWithUser(CategoryRead):
+    user: UserRead | None = None
+
+
+class TagReadWithMetadata(TagRead):
+    assigned_at: datetime
+    priority: int | None = None
+
+
+class OperationRead(OperationBase):
+    id: int
+
+
+class OperationReadWithRelations(OperationRead):
+    user: UserRead | None = None
+    category: CategoryRead | None = None
+    tags: list[TagReadWithMetadata] = PydanticField(default_factory=list)
+
+
+class PasswordChange(BaseModel):
+    old_password: str = PydanticField(max_length=128)
+    new_password: str = PydanticField(min_length=8, max_length=128)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = &quot;bearer&quot;
+</code></pre>
+<h2 id="lr3finance_apiappparser_clientpy">Lr3/finance_api/app/parser_client.py</h2>
+<pre><code class="language-python">import os
+
+import requests
+
+from app.parser_models import ParseRequest
+
+PARSER_SERVICE_URL = os.getenv(&quot;PARSER_SERVICE_URL&quot;, &quot;http://parser-service:8000&quot;)
+PARSER_TIMEOUT = int(os.getenv(&quot;PARSER_TIMEOUT&quot;, &quot;30&quot;))
+
+
+def parse_via_service(payload: ParseRequest) -&gt; dict:
+    response = requests.post(
+        f&quot;{PARSER_SERVICE_URL}/parse&quot;,
+        json=payload.model_dump(mode=&quot;json&quot;),
+        timeout=PARSER_TIMEOUT,
+    )
+    response.raise_for_status()
+    return response.json()
+</code></pre>
+<h2 id="lr3finance_apiappparser_modelspy">Lr3/finance_api/app/parser_models.py</h2>
+<pre><code class="language-python">from pydantic import BaseModel, Field, HttpUrl
+
+
+class ParseRequest(BaseModel):
+    url: HttpUrl = Field(..., max_length=500)
+
+
+class ParseResultResponse(BaseModel):
+    message: str
+    url: str
+    title: str
+    source_name: str
+    status_code: int
+    fetch_method: str
+
+
+class AsyncParseAccepted(BaseModel):
+    message: str
+    task_id: str
+    url: str
+
+
+class TaskStatusResponse(BaseModel):
+    task_id: str
+    status: str
+    ready: bool
+    result: dict | None = None
+    error: str | None = None
+</code></pre>
+<h2 id="lr3finance_apiappparser_routespy">Lr3/finance_api/app/parser_routes.py</h2>
+<pre><code class="language-python">from uuid import uuid4
+
+from celery.result import AsyncResult
+from fastapi import APIRouter, Depends, HTTPException
+from requests import RequestException, Timeout
+from redis.exceptions import RedisError
+from kombu.exceptions import OperationalError
+
+from app.celery_app import celery_app
+from app.models import User
+from app.parser_client import parse_via_service
+from app.parser_models import AsyncParseAccepted, ParseRequest, ParseResultResponse, TaskStatusResponse
+from app.security import get_current_user
+from app.tasks import parse_url_task
+
+router = APIRouter(prefix=&quot;/parser&quot;, tags=[&quot;Парсер&quot;])
+
+
+@router.post(&quot;/parse-sync&quot;, response_model=ParseResultResponse, status_code=201)
+def parse_sync(payload: ParseRequest, user: User = Depends(get_current_user)) -&gt; ParseResultResponse:
+    try:
+        return ParseResultResponse.model_validate(parse_via_service(payload))
+    except Timeout:
+        raise HTTPException(504, &quot;Парсер не ответил вовремя&quot;)
+    except RequestException:
+        raise HTTPException(502, &quot;Не удалось получить страницу; проверьте URL или повторите позже&quot;)
+
+
+@router.post(&quot;/parse-async&quot;, response_model=AsyncParseAccepted, status_code=202)
+def parse_async(payload: ParseRequest, user: User = Depends(get_current_user)) -&gt; AsyncParseAccepted:
+    task_id = str(uuid4())
+    try:
+        # Привязываем результат к пользователю до отправки задания воркеру.
+        celery_app.backend.client.setex(f&quot;parser-owner:{task_id}&quot;, 86400, str(user.id))
+        parse_url_task.apply_async(args=[str(payload.url)], task_id=task_id)
+    except (RedisError, OperationalError):
+        raise HTTPException(503, &quot;Очередь временно недоступна&quot;)
+    return AsyncParseAccepted(message=&quot;Задание принято&quot;, task_id=task_id, url=str(payload.url))
+
+
+@router.get(&quot;/tasks/{task_id}&quot;, response_model=TaskStatusResponse)
+def task_status(task_id: str, user: User = Depends(get_current_user)) -&gt; TaskStatusResponse:
+    try:
+        owner = celery_app.backend.client.get(f&quot;parser-owner:{task_id}&quot;)
+        if owner is None or owner.decode() != str(user.id):
+            raise HTTPException(404, &quot;Задание не найдено или срок хранения истёк&quot;)
+        task = AsyncResult(task_id, app=celery_app)
+        state = task.state
+        return TaskStatusResponse(task_id=task_id, status=state, ready=task.ready(),
+                                  result=task.result if state == &quot;SUCCESS&quot; else None,
+                                  error=&quot;Не удалось обработать URL после повторных попыток&quot; if state == &quot;FAILURE&quot; else None)
+    except (RedisError, OperationalError):
+        raise HTTPException(503, &quot;Хранилище результатов временно недоступно&quot;)
+</code></pre>
+<h2 id="lr3finance_apiappreportspy">Lr3/finance_api/app/reports.py</h2>
+<pre><code class="language-python">from datetime import datetime
+from decimal import Decimal
+
+from fastapi import APIRouter, Depends, Query
+from pydantic import BaseModel
+from sqlmodel import Session, select
+
+from app.db import get_session
+from app.models import Category, Operation, OperationType, User
+from app.security import get_current_user
+
+router = APIRouter(prefix=&quot;/reports&quot;, tags=[&quot;Отчёты&quot;])
+
+
+class CategoryReport(BaseModel):
+    category_id: int
+    name: str
+    expense: float
+    monthly_limit: float | None
+    remaining: float | None
+    exceeded: bool
+
+
+class MonthlyReport(BaseModel):
+    year: int
+    month: int
+    income: float
+    expense: float
+    balance: float
+    categories: list[CategoryReport]
+
+
+@router.get(&quot;/monthly&quot;, response_model=MonthlyReport)
+def monthly_report(year: int = Query(ge=2000, le=9998), month: int = Query(ge=1, le=12),
+                   user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; MonthlyReport:
+    start = datetime(year, month, 1)
+    end = datetime(year + 1, 1, 1) if month == 12 else datetime(year, month + 1, 1)
+    operations = session.exec(select(Operation).where(
+        Operation.user_id == user.id, Operation.operation_date &gt;= start, Operation.operation_date &lt; end,
+    )).all()
+    income = Decimal(&quot;0&quot;)
+    expense = Decimal(&quot;0&quot;)
+    spent = {}
+    for operation in operations:
+        amount = Decimal(str(operation.amount))
+        if operation.operation_type == OperationType.income:
+            income += amount
+        else:
+            expense += amount
+            spent[operation.category_id] = spent.get(operation.category_id, Decimal(&quot;0&quot;)) + amount
+    categories = []
+    for category in session.exec(select(Category).where(Category.user_id == user.id)).all():
+        total = spent.get(category.id, Decimal(&quot;0&quot;))
+        limit = Decimal(str(category.monthly_limit)) if category.monthly_limit is not None else None
+        categories.append(CategoryReport(
+            category_id=category.id, name=category.name, expense=float(total), monthly_limit=category.monthly_limit,
+            remaining=float(limit - total) if limit is not None else None,
+            exceeded=limit is not None and total &gt; limit,
+        ))
+    return MonthlyReport(year=year, month=month, income=float(income), expense=float(expense),
+                         balance=float(income - expense), categories=categories)
+</code></pre>
+<h2 id="lr3finance_apiappsecuritypy">Lr3/finance_api/app/security.py</h2>
+<pre><code class="language-python">&quot;&quot;&quot;Пароли и JWT. Регистрация и проверка пользователя реализованы вручную.&quot;&quot;&quot;
+import hashlib
+import hmac
+import os
+import secrets
+from datetime import datetime, timedelta, timezone
+
+import jwt
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from sqlmodel import Session
+
+from app.db import get_session
+from app.models import User
+
+SECRET_KEY = os.environ.get(&quot;JWT_SECRET&quot;, &quot;&quot;)
+if len(SECRET_KEY) &lt; 32:
+    raise RuntimeError(&quot;Задайте JWT_SECRET длиной не менее 32 символов в .env&quot;)
+oauth2 = OAuth2PasswordBearer(tokenUrl=&quot;auth/token&quot;)
+
+
+def hash_password(password: str) -&gt; str:
+    salt = secrets.token_hex(16)
+    digest = hashlib.pbkdf2_hmac(&quot;sha256&quot;, password.encode(), salt.encode(), 600_000)
+    return f&quot;pbkdf2_sha256$600000${salt}${digest.hex()}&quot;
+
+
+def verify_password(password: str, stored: str | None) -&gt; bool:
+    if not stored:
+        return False  # У записей из старой практики пароля ещё нет.
+    try:
+        algorithm, iterations, salt, digest = stored.split(&quot;$&quot;)
+        if algorithm != &quot;pbkdf2_sha256&quot;:
+            return False
+        actual = hashlib.pbkdf2_hmac(&quot;sha256&quot;, password.encode(), salt.encode(), int(iterations))
+        return hmac.compare_digest(actual.hex(), digest)
+    except (ValueError, TypeError):
+        return False
+
+
+def create_token(user: User) -&gt; str:
+    now = datetime.now(timezone.utc)
+    return jwt.encode(
+        {&quot;sub&quot;: str(user.id), &quot;iat&quot;: now, &quot;exp&quot;: now + timedelta(minutes=30),
+         &quot;version&quot;: user.token_version}, SECRET_KEY, algorithm=&quot;HS256&quot;,
+    )
+
+
+def get_current_user(token: str = Depends(oauth2), session: Session = Depends(get_session)) -&gt; User:
+    error = HTTPException(401, &quot;Требуется действующий токен&quot;, headers={&quot;WWW-Authenticate&quot;: &quot;Bearer&quot;})
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[&quot;HS256&quot;],
+                             options={&quot;require&quot;: [&quot;sub&quot;, &quot;exp&quot;, &quot;iat&quot;, &quot;version&quot;]})
+        user = session.get(User, int(payload[&quot;sub&quot;]))
+    except (jwt.InvalidTokenError, ValueError, TypeError):
+        raise error
+    if user is None or user.token_version != payload[&quot;version&quot;]:
+        raise error
+    return user
+</code></pre>
+<h2 id="lr3finance_apiapptaskspy">Lr3/finance_api/app/tasks.py</h2>
+<pre><code class="language-python">from requests import RequestException
+from app.celery_app import celery_app
+from app.parser_client import parse_via_service
+from app.parser_models import ParseRequest
+
+
+@celery_app.task(name=&quot;app.tasks.parse_url_task&quot;, autoretry_for=(RequestException,),
+                 retry_backoff=2, retry_backoff_max=10, retry_jitter=False,
+                 retry_kwargs={&quot;max_retries&quot;: 2})
+def parse_url_task(url: str) -&gt; dict:
+    return parse_via_service(ParseRequest(url=url))
+</code></pre>
+<h2 id="lr3finance_apiappuserspy">Lr3/finance_api/app/users.py</h2>
+<pre><code class="language-python">from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.exc import IntegrityError
+from sqlmodel import Session, select
+
+from app.db import get_session
+from app.models import User, UserCreate, UserRead, UserReadWithRelations, UserUpdate, PasswordChange, Token
+from app.security import create_token, get_current_user, hash_password, verify_password
+
+router = APIRouter(tags=[&quot;Пользователи&quot;])
+
+
+@router.post(&quot;/auth/register&quot;, response_model=UserRead, status_code=201)
+@router.post(&quot;/users&quot;, response_model=UserRead, status_code=201)
+def register(data: UserCreate, session: Session = Depends(get_session)) -&gt; User:
+    user = User(email=str(data.email).lower(), full_name=data.full_name,
+                hashed_password=hash_password(data.password))
+    session.add(user)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(409, &quot;Email уже зарегистрирован&quot;)
+    session.refresh(user)
+    return user
+
+
+@router.post(&quot;/auth/token&quot;, response_model=Token)
+def login(form: OAuth2PasswordRequestForm = Depends(), session: Session = Depends(get_session)) -&gt; Token:
+    user = session.exec(select(User).where(User.email == form.username.lower())).first()
+    if user is None or not verify_password(form.password, user.hashed_password):
+        raise HTTPException(401, &quot;Неверный email или пароль&quot;, headers={&quot;WWW-Authenticate&quot;: &quot;Bearer&quot;})
+    return Token(access_token=create_token(user))
+
+
+@router.get(&quot;/users/me&quot;, response_model=UserReadWithRelations)
+def me(user: User = Depends(get_current_user)) -&gt; User:
+    return user
+
+
+@router.post(&quot;/users/me/password&quot;, status_code=204)
+def change_password(data: PasswordChange, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Response:
+    if not verify_password(data.old_password, user.hashed_password):
+        raise HTTPException(400, &quot;Неверный текущий пароль&quot;)
+    user.hashed_password = hash_password(data.new_password)
+    user.token_version += 1  # Старые токены перестают действовать.
+    session.add(user)
+    session.commit()
+    return Response(status_code=204)
+
+
+@router.get(&quot;/users&quot;, response_model=list[UserRead])
+def users(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[User]:
+    return list(session.exec(select(User)).all())
+
+
+@router.get(&quot;/users/{user_id}&quot;, response_model=UserRead)
+def read_user(user_id: int, user: User = Depends(get_current_user),
+              session: Session = Depends(get_session)) -&gt; User:
+    found = session.get(User, user_id)
+    if found is None:
+        raise HTTPException(404, &quot;Пользователь не найден&quot;)
+    return found
+
+
+@router.patch(&quot;/users/{user_id}&quot;, response_model=UserRead)
+def update_user(user_id: int, data: UserUpdate, user: User = Depends(get_current_user),
+                session: Session = Depends(get_session)) -&gt; User:
+    if user_id != user.id:
+        raise HTTPException(403, &quot;Можно менять только свой профиль&quot;)
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(user, key, str(value).lower() if key == &quot;email&quot; else value)
+    session.add(user)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(409, &quot;Email уже зарегистрирован&quot;)
+    session.refresh(user)
+    return user
+
+
+@router.delete(&quot;/users/{user_id}&quot;, status_code=204)
+def delete_user(user_id: int, user: User = Depends(get_current_user),
+                session: Session = Depends(get_session)) -&gt; Response:
+    if user_id != user.id:
+        raise HTTPException(403, &quot;Можно удалить только свой профиль&quot;)
+    if user.operations or user.categories:
+        raise HTTPException(409, &quot;Сначала удалите операции и категории&quot;)
+    session.delete(user)
+    session.commit()
+    return Response(status_code=204)
+</code></pre>
+<h2 id="lr3docker-composeyml">Lr3/docker-compose.yml</h2>
+<pre><code class="language-yaml">services:
+  db:
+    image: postgres:16
+    container_name: lr3-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: personal_finance_lab3
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - &quot;127.0.0.1:${DB_PORT:-5434}:5432&quot;
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U postgres -d personal_finance_lab3&quot;]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+
+  redis:
+    image: redis:7-alpine
+    container_name: lr3-redis
+    restart: unless-stopped
+    ports:
+      - &quot;127.0.0.1:${REDIS_PORT:-6379}:6379&quot;
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;ping&quot;]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  migrate:
+    build: ./finance_api
+    command: python migrate.py
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+    depends_on:
+      db:
+        condition: service_healthy
+
+  parser-service:
+    build: ./parser_service
+    container_name: lr3-parser-service
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+      ROOT_PATH: ${PARSER_ROOT_PATH:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - &quot;127.0.0.1:${PARSER_PORT:-8001}:8000&quot;
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;python&quot;, &quot;-c&quot;, &quot;import urllib.request; urllib.request.urlopen('http://localhost:8000/health')&quot;]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  finance-api:
+    build: ./finance_api
+    container_name: lr3-finance-api
+    restart: unless-stopped
+    environment: &amp;finance-env
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      ROOT_PATH: ${LR3_ROOT_PATH:-}
+      PARSER_SERVICE_URL: http://parser-service:8000
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      SCHEDULED_PARSE_URL: ${SCHEDULED_PARSE_URL:-https://www.worldbank.org/}
+      PARSE_INTERVAL_SECONDS: ${PARSE_INTERVAL_SECONDS:-21600}
+    depends_on:
+      parser-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - &quot;127.0.0.1:${API_PORT:-8000}:8000&quot;
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;python&quot;, &quot;-c&quot;, &quot;import urllib.request; urllib.request.urlopen('http://localhost:8000/health')&quot;]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  lr1-api:
+    build: ../Lr1/practice_1_3
+    container_name: lr1-finance-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/personal_finance_lab3
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      ROOT_PATH: ${LR1_ROOT_PATH:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - &quot;127.0.0.1:${LR1_PORT:-8011}:8000&quot;
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;python&quot;, &quot;-c&quot;, &quot;import urllib.request; urllib.request.urlopen('http://localhost:8000/health')&quot;]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  celery-worker:
+    build: ./finance_api
+    container_name: lr3-celery-worker
+    restart: unless-stopped
+    command: celery -A app.celery_app:celery_app worker --loglevel=info --concurrency=2
+    environment: *finance-env
+    depends_on:
+      parser-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery-beat:
+    build: ./finance_api
+    container_name: lr3-celery-beat
+    restart: unless-stopped
+    command: celery -A app.celery_app:celery_app beat --loglevel=info --schedule=/tmp/celerybeat-schedule
+    environment: *finance-env
+    depends_on:
+      parser-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+</code></pre>
+<h2 id="lr3finance_apidockerfile">Lr3/finance_api/Dockerfile</h2>
+<pre><code class="language-dockerfile">FROM python:3.12-slim
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app ./app
+COPY migrations ./migrations
+COPY alembic.ini migrate.py .
+CMD [&quot;uvicorn&quot;, &quot;app.main:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;]
+</code></pre>
+<h2 id="lr3parser_servicedockerfile">Lr3/parser_service/Dockerfile</h2>
+<pre><code class="language-dockerfile">FROM python:3.12-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app ./app
+
+CMD [&quot;uvicorn&quot;, &quot;app.main:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;]
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

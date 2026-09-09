@@ -88,6 +88,8 @@ def ensure_category_exists(category_id: int | None, session: Session) -> None:
 
 
 def ensure_tag_ids_exist(tag_ids: Sequence[int], session: Session) -> list[Tag]:
+    if len(tag_ids) != len(set(tag_ids)):
+        raise HTTPException(422, "Tag ids must be unique")
     tags = []
     for tag_id in tag_ids:
         tag = session.get(Tag, tag_id)
@@ -338,12 +340,12 @@ def get_operation(operation_id: int, session: Session = Depends(get_session)) ->
 def create_operation(operation: OperationCreate, session: Session = Depends(get_session)) -> OperationReadWithRelations:
     ensure_user_exists(operation.user_id, session)
     ensure_category_exists(operation.category_id, session)
+    ensure_tag_ids_exist(operation.tag_ids, session)
 
     payload = operation.model_dump(exclude={"tag_ids"})
     db_operation = Operation.model_validate(payload)
     session.add(db_operation)
-    session.commit()
-    session.refresh(db_operation)
+    session.flush()
 
     update_operation_links(db_operation, operation.tag_ids, session)
     session.commit()
@@ -365,17 +367,18 @@ def update_operation(
         ensure_user_exists(operation_data["user_id"], session)
     if "category_id" in operation_data:
         ensure_category_exists(operation_data["category_id"], session)
+    if operation.tag_ids is not None:
+        ensure_tag_ids_exist(operation.tag_ids, session)
 
     for key, value in operation_data.items():
         setattr(db_operation, key, value)
 
     session.add(db_operation)
-    session.commit()
-    session.refresh(db_operation)
+    session.flush()
 
     if operation.tag_ids is not None:
         update_operation_links(db_operation, operation.tag_ids, session)
-        session.commit()
+    session.commit()
 
     updated_operation = get_operation_or_404(operation_id, session)
     return serialize_operation(updated_operation, session)

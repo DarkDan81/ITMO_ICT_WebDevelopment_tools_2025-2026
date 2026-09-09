@@ -11,7 +11,7 @@ PARSER_TIMEOUT = int(os.getenv("PARSER_TIMEOUT", "30"))
 def parse_via_service(payload: ParseRequest) -> dict:
     response = requests.post(
         f"{PARSER_SERVICE_URL}/parse",
-        json=payload.model_dump(),
+        json=payload.model_dump(mode="json"),
         timeout=PARSER_TIMEOUT,
     )
     response.raise_for_status()

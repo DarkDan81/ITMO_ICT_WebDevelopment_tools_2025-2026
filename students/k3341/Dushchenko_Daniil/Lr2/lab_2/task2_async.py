@@ -1,55 +1,41 @@
 import asyncio
-
+import ssl
 import aiohttp
+import certifi
 
-from app.config import DEFAULT_WORKERS, URLS
-from app.parse_shared import (
-    extract_title,
-    print_page_result,
-    print_parse_result,
-    reset_results,
-    save_page_result,
-    timed_parse_run,
-)
-
-FETCH_METHOD = "async"
+from app.config import DEFAULT_WORKERS, REQUEST_TIMEOUT, URLS, split_items
+from app.parsing import extract_title, run_and_print
+from app.parse_shared import save_page_result
 
 
-async def parse_and_save(url: str, session: aiohttp.ClientSession) -> int:
-    async with session.get(url, timeout=20) as response:
-        html = await response.text()
-        title = extract_title(html)
-        await asyncio.to_thread(save_page_result, url, title, response.status, FETCH_METHOD)
-        print_page_result(url, title, response.status, FETCH_METHOD)
-        return 1
-
-
-def chunked(items: list[str], chunks: int) -> list[list[str]]:
-    size = max(1, len(items) // chunks)
-    return [items[index:index + size] for index in range(0, len(items), size)]
+async def parse_and_save(url: str, session: aiohttp.ClientSession | None = None) -> bool:
+    if session is None:
+        connector = aiohttp.TCPConnector(ssl=ssl.create_default_context(cafile=certifi.where()))
+        async with aiohttp.ClientSession(connector=connector, timeout=aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)) as client:
+            return await parse_and_save(url, client)
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            title = extract_title(await response.read())
+            await asyncio.to_thread(save_page_result, url, title, response.status, "async")
+            print(f"[async] {response.status} | {url} | {title}", flush=True)
+            return True
+    except Exception as error:
+        print(f"[async] ERROR | {url} | {type(error).__name__}: {error}", flush=True)
+        return False
 
 
 def main() -> None:
-    reset_results(FETCH_METHOD)
-    workers = min(DEFAULT_WORKERS, len(URLS))
-    url_chunks = chunked(URLS, workers)
+    chunks = split_items(URLS, DEFAULT_WORKERS)
 
-    def runner() -> int:
-        async def run_async() -> int:
-            async with aiohttp.ClientSession() as session:
-                async def process_chunk(urls: list[str]) -> int:
-                    total = 0
-                    for url in urls:
-                        total += await parse_and_save(url, session)
-                    return total
+    async def run_async() -> int:
+        connector = aiohttp.TCPConnector(ssl=ssl.create_default_context(cafile=certifi.where()))
+        async with aiohttp.ClientSession(connector=connector, timeout=aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)) as session:
+            async def process_chunk(urls: list[str]) -> int:
+                return sum([await parse_and_save(url, session) for url in urls])
+            return sum(await asyncio.gather(*(process_chunk(chunk) for chunk in chunks)))
 
-                tasks = [process_chunk(chunk) for chunk in url_chunks]
-                return sum(await asyncio.gather(*tasks))
-
-        return asyncio.run(run_async())
-
-    result = timed_parse_run(FETCH_METHOD, runner)
-    print_parse_result(result)
+    run_and_print("async", len(URLS), lambda: asyncio.run(run_async()))
 
 
 if __name__ == "__main__":

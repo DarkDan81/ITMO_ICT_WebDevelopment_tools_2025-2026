@@ -1,8 +1,19 @@
 from datetime import datetime
 from enum import Enum
 
-from pydantic import Field as PydanticField
+from pydantic import Field as PydanticField, model_validator
 from sqlmodel import Field, Relationship, SQLModel
+
+
+class UpdateModel(SQLModel):
+    @model_validator(mode="before")
+    @classmethod
+    def reject_null_required(cls, values):
+        if isinstance(values, dict):
+            for key, value in values.items():
+                if value is None and key not in {"description", "monthly_limit"}:
+                    raise ValueError(f"{key} cannot be null")
+        return values
 
 
 class OperationType(str, Enum):
@@ -25,7 +36,7 @@ class UserCreate(UserBase):
     pass
 
 
-class UserUpdate(SQLModel):
+class UserUpdate(UpdateModel):
     email: str | None = Field(default=None, max_length=255)
     full_name: str | None = Field(default=None, max_length=100)
 
@@ -46,7 +57,7 @@ class CategoryCreate(CategoryBase):
     pass
 
 
-class CategoryUpdate(SQLModel):
+class CategoryUpdate(UpdateModel):
     name: str | None = Field(default=None, max_length=50)
     monthly_limit: float | None = Field(default=None, ge=0)
     user_id: int | None = None
@@ -78,7 +89,7 @@ class TagCreate(TagBase):
     pass
 
 
-class TagUpdate(SQLModel):
+class TagUpdate(UpdateModel):
     name: str | None = Field(default=None, max_length=30)
 
 
@@ -106,7 +117,7 @@ class OperationCreate(OperationBase):
     tag_ids: list[int] = PydanticField(default_factory=list)
 
 
-class OperationUpdate(SQLModel):
+class OperationUpdate(UpdateModel):
     title: str | None = Field(default=None, max_length=100)
     amount: float | None = Field(default=None, gt=0)
     operation_type: OperationType | None = None

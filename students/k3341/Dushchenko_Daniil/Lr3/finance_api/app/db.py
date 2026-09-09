@@ -10,7 +10,7 @@ DATABASE_URL = os.getenv(
     "postgresql://postgres@localhost:5432/personal_finance_practice_3_db",
 )
 
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=False)
 
 
 def init_db() -> None:

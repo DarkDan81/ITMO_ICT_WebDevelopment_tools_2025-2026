@@ -1,5 +1,8 @@
-fastapi[all]
-sqlmodel
-psycopg2-binary
-alembic
-python-dotenv
+fastapi[standard]>=0.115,<1
+httpx>=0.27,<1
+sqlmodel>=0.0.22,<0.1
+psycopg2-binary>=2.9,<3
+alembic>=1.14,<2
+python-dotenv>=1,<2
+PyJWT>=2.10,<3
+email-validator>=2,<3

@@ -1,22 +1,27 @@
-# Отчетные материалы
+# Средства Web-программирования
 
-## Студент
+Дущенко Даниил · К3341 · 2025–2026
 
-Дущенко Даниил, группа `K3341`.
+Тема проекта — сервис управления личными финансами.
 
-## Лабораторные работы
+| Работа | Содержание |
+| --- | --- |
+| [ЛР1](lr1.md) | FastAPI, PostgreSQL, SQLModel, Alembic, JWT и финансовый отчёт |
+| [ЛР2](lr2.md) | Потоки, процессы, asyncio: сумма и парсинг финансовых сайтов |
+| [ЛР3](lr3.md) | Docker Compose, HTTP-парсер, Redis, Celery и периодические задачи |
 
-- [Лабораторная работа 1](lr1.md)
-- [Лабораторная работа 2](lr2.md)
-- [Лабораторная работа 3](lr3.md)
+Для каждой работы приведены ход выполнения, команды запуска, результаты проверки и исходный код.
+Отчёт собран с помощью MkDocs. Измерения ЛР2 и проверка серверной сборки выполнены 09.09.2026.
 
-## Структура сдачи
+## Демонстрация на сервере
 
-- `students/k3341/Dushchenko_Daniil/Lr1`
-- `students/k3341/Dushchenko_Daniil/Lr2`
-- `students/k3341/Dushchenko_Daniil/Lr3`
-- `students/k3341/Dushchenko_Daniil/docs`
+- [Swagger ЛР1](https://darkdan.ru/web-labs/api/lr1/docs)
+- [Swagger ЛР3](https://darkdan.ru/web-labs/api/lr3/docs)
+- [Swagger парсера](https://darkdan.ru/web-labs/api/parser/docs)
 
-## Дополнительно
+После входа на сайт нужно зарегистрировать пользователя в API и выполнить Authorize в Swagger.
 
-Отдельно в репозитории сохранен `GitHub Pages`-отчет в папке `docs`, который использовался для красивой веб-публикации. Эта `mkdocs`-структура сделана специально под формат сдачи.
+## Задания
+
+- [Репозиторий дисциплины](https://github.com/TonikX/ITMO_ICT_WebDevelopment_tools_2025-2026)
+- [Текст ЛР1 и практики](https://rendex85.github.io/WebDevelopmentLabsDocs/lr2/lr2/)

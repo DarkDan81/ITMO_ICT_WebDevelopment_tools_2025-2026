@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="author" content="Дущенко Даниил">
+        <link rel="canonical" href="https://darkdan.ru/web-labs/lr2-code/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Код ЛР2 - Средства Web-программирования</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Средства Web-программирования</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1/" class="nav-link">ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1-code/" class="nav-link">Код ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2/" class="nav-link">ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Код ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr3/" class="nav-link">ЛР3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr3-code/" class="nav-link">Код ЛР3</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../lr2/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../lr3/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+
+            <li class="nav-item" data-bs-level="1"><a href="#lr2" class="nav-link">Исходный код LR2</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2appcompute_sharedpy" class="nav-link">Lr2/lab_2/app/compute_shared.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2appconfigpy" class="nav-link">Lr2/lab_2/app/config.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2appdbpy" class="nav-link">Lr2/lab_2/app/db.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2appmodelspy" class="nav-link">Lr2/lab_2/app/models.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2appparse_sharedpy" class="nav-link">Lr2/lab_2/app/parse_shared.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2appparsingpy" class="nav-link">Lr2/lab_2/app/parsing.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2task1_asyncpy" class="nav-link">Lr2/lab_2/task1_async.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2task1_multiprocessingpy" class="nav-link">Lr2/lab_2/task1_multiprocessing.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2task1_threadingpy" class="nav-link">Lr2/lab_2/task1_threading.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2task2_asyncpy" class="nav-link">Lr2/lab_2/task2_async.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2task2_multiprocessingpy" class="nav-link">Lr2/lab_2/task2_multiprocessing.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr2lab_2task2_threadingpy" class="nav-link">Lr2/lab_2/task2_threading.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lr2">Исходный код LR2</h1>
+<p>Код соответствует текущим файлам проекта.</p>
+<h2 id="lr2lab_2appcompute_sharedpy">Lr2/lab_2/app/compute_shared.py</h2>
+<pre><code class="language-python">from __future__ import annotations
+
+from dataclasses import dataclass
+from time import perf_counter
+
+
+@dataclass
+class ComputeResult:
+    approach: str
+    workers: int
+    total: int
+    duration: float
+
+
+def calculate_sum(start: int, end: int, mode: str = &quot;formula&quot;) -&gt; int:
+    &quot;&quot;&quot;Формула для 10^13; цикл — для сравнения CPU-bound работы.&quot;&quot;&quot;
+    if mode == &quot;loop&quot;:
+        total = 0
+        for number in range(start, end + 1):
+            total += number
+        return total
+    count = end - start + 1
+    return (start + end) * count // 2
+
+
+def split_range(limit: int, chunks: int) -&gt; list[tuple[int, int]]:
+    chunks = min(limit, chunks)
+    chunk_size = limit // chunks
+    ranges: list[tuple[int, int]] = []
+    start = 1
+
+    for index in range(chunks):
+        end = start + chunk_size - 1
+        if index == chunks - 1:
+            end = limit
+        ranges.append((start, end))
+        start = end + 1
+
+    return ranges
+
+
+def timed_run(approach: str, workers: int, runner) -&gt; ComputeResult:
+    started = perf_counter()
+    total = runner()
+    duration = perf_counter() - started
+    return ComputeResult(
+        approach=approach,
+        workers=workers,
+        total=total,
+        duration=duration,
+    )
+
+
+def print_compute_result(result: ComputeResult) -&gt; None:
+    print(f&quot;Approach: {result.approach}&quot;)
+    print(f&quot;Workers: {result.workers}&quot;)
+    print(f&quot;Total sum: {result.total}&quot;)
+    print(f&quot;Duration: {result.duration:.6f} seconds&quot;)
+</code></pre>
+<h2 id="lr2lab_2appconfigpy">Lr2/lab_2/app/config.py</h2>
+<pre><code class="language-python">import os
+import json
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv(
+    &quot;DATABASE_URL&quot;,
+    &quot;postgresql://postgres@localhost:5432/personal_finance_practice_3_db&quot;,
+)
+
+SUM_LIMIT = int(os.getenv(&quot;LAB2_SUM_LIMIT&quot;, &quot;10000000000000&quot;))
+SUM_MODE = os.getenv(&quot;LAB2_SUM_MODE&quot;, &quot;formula&quot;)
+DEFAULT_WORKERS = int(os.getenv(&quot;LAB2_WORKERS&quot;, &quot;4&quot;))
+if SUM_LIMIT &lt; 1 or DEFAULT_WORKERS &lt; 1 or SUM_MODE not in {&quot;formula&quot;, &quot;loop&quot;}:
+    raise ValueError(&quot;Проверьте LAB2_SUM_LIMIT, LAB2_WORKERS и LAB2_SUM_MODE&quot;)
+REQUEST_TIMEOUT = 12
+
+URLS = json.loads(os.getenv(&quot;LAB2_URLS&quot;, '[&quot;https://www.worldbank.org/&quot;, &quot;https://www.federalreserve.gov/&quot;, &quot;https://www.cbr.ru/&quot;, &quot;https://www.bis.org/&quot;]'))
+if not URLS:
+    raise ValueError(&quot;Список LAB2_URLS не должен быть пустым&quot;)
+
+
+def split_items(items: list, workers: int) -&gt; list[list]:
+    &quot;&quot;&quot;Размеры частей отличаются максимум на один элемент.&quot;&quot;&quot;
+    workers = min(workers, len(items))
+    size, extra = divmod(len(items), workers)
+    result = []
+    start = 0
+    for index in range(workers):
+        end = start + size + (index &lt; extra)
+        result.append(items[start:end])
+        start = end
+    return result
+</code></pre>
+<h2 id="lr2lab_2appdbpy">Lr2/lab_2/app/db.py</h2>
+<pre><code class="language-python">from sqlmodel import Session, SQLModel, create_engine
+
+from app.config import DATABASE_URL
+
+engine = create_engine(DATABASE_URL, echo=False)
+
+
+def init_db() -&gt; None:
+    SQLModel.metadata.create_all(engine)
+
+
+def get_session() -&gt; Session:
+    return Session(engine)
+</code></pre>
+<h2 id="lr2lab_2appmodelspy">Lr2/lab_2/app/models.py</h2>
+<pre><code class="language-python">from datetime import datetime, timezone
+
+from sqlmodel import Field, SQLModel
+
+
+class ParsedPage(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    url: str = Field(index=True, max_length=500)
+    source_name: str = Field(max_length=100)
+    title: str = Field(max_length=500)
+    fetch_method: str = Field(max_length=30, index=True)
+    status_code: int
+    fetched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+</code></pre>
+<h2 id="lr2lab_2appparse_sharedpy">Lr2/lab_2/app/parse_shared.py</h2>
+<pre><code class="language-python">from urllib.parse import urlparse
+from app.db import get_session
+from app.models import ParsedPage
+
+
+def save_page_result(url: str, title: str, status_code: int, fetch_method: str) -&gt; None:
+    with get_session() as session:
+        session.add(ParsedPage(url=url, title=title,
+                               source_name=(urlparse(url).hostname or &quot;unknown&quot;)[:100],
+                               status_code=status_code, fetch_method=fetch_method))
+        session.commit()
+</code></pre>
+<h2 id="lr2lab_2appparsingpy">Lr2/lab_2/app/parsing.py</h2>
+<pre><code class="language-python">&quot;&quot;&quot;Общие действия парсеров. Ошибка одного сайта не прерывает остальные.&quot;&quot;&quot;
+from html.parser import HTMLParser
+from time import perf_counter
+
+import requests
+from charset_normalizer import from_bytes
+
+from app.config import REQUEST_TIMEOUT
+from app.db import engine, init_db
+from app.parse_shared import save_page_result
+
+
+class TitleParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.inside = False
+        self.done = False
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == &quot;title&quot; and not self.done:
+            self.inside = True
+
+    def handle_endtag(self, tag):
+        if tag == &quot;title&quot; and self.inside:
+            self.inside = False
+            self.done = True
+
+    def handle_data(self, data):
+        if self.inside:
+            self.parts.append(data)
+
+
+def extract_title(content: bytes) -&gt; str:
+    decoded = from_bytes(content).best()
+    parser = TitleParser()
+    parser.feed(str(decoded) if decoded is not None else content.decode(&quot;utf-8&quot;, errors=&quot;replace&quot;))
+    title = &quot; &quot;.join(&quot;&quot;.join(parser.parts).split())
+    if not title:
+        raise ValueError(&quot;У страницы нет заголовка title&quot;)
+    return title[:500]
+
+
+def fetch_and_save(url: str, method: str) -&gt; bool:
+    try:
+        response = requests.get(url, timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        title = extract_title(response.content)
+        save_page_result(url, title, response.status_code, method)
+        print(f&quot;[{method}] {response.status_code} | {url} | {title}&quot;, flush=True)
+        return True
+    except Exception as error:
+        # Учебный пакетный запуск: показываем сбой, затем продолжаем список.
+        print(f&quot;[{method}] ERROR | {url} | {type(error).__name__}: {error}&quot;, flush=True)
+        return False
+
+
+def prepare() -&gt; None:
+    init_db()
+    engine.dispose()  # Соединения родителя не должны попасть в дочерние процессы.
+
+
+def run_and_print(method: str, count: int, runner) -&gt; None:
+    prepare()
+    started = perf_counter()
+    successful = runner()
+    print(f&quot;Approach: {method}&quot;)
+    print(f&quot;Successful: {successful}; Failed: {count - successful}; Total: {count}&quot;)
+    print(f&quot;Duration: {perf_counter() - started:.6f} seconds&quot;)
+</code></pre>
+<h2 id="lr2lab_2task1_asyncpy">Lr2/lab_2/task1_async.py</h2>
+<pre><code class="language-python">import asyncio
+
+from app.compute_shared import calculate_sum as sum_chunk, print_compute_result, split_range, timed_run
+from app.config import DEFAULT_WORKERS, SUM_LIMIT, SUM_MODE
+
+
+async def calculate_sum(start: int, end: int) -&gt; int:
+    if SUM_MODE == &quot;formula&quot;:
+        await asyncio.sleep(0)
+        return sum_chunk(start, end)
+    total = 0
+    for offset, number in enumerate(range(start, end + 1), 1):
+        total += number
+        if offset % 100000 == 0:
+            await asyncio.sleep(0)
+    return total
+
+
+def main() -&gt; None:
+    workers = DEFAULT_WORKERS
+    ranges = split_range(SUM_LIMIT, workers)
+
+    def runner() -&gt; int:
+        async def run_async() -&gt; int:
+            tasks = [calculate_sum(start, end) for start, end in ranges]
+            return sum(await asyncio.gather(*tasks))
+
+        return asyncio.run(run_async())
+
+    result = timed_run(&quot;asyncio&quot;, workers, runner)
+    assert result.total == SUM_LIMIT * (SUM_LIMIT + 1) // 2
+    print(f&quot;Mode: {SUM_MODE}; N: {SUM_LIMIT}&quot;)
+    print_compute_result(result)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="lr2lab_2task1_multiprocessingpy">Lr2/lab_2/task1_multiprocessing.py</h2>
+<pre><code class="language-python">from multiprocessing import Pool, cpu_count
+
+from app.compute_shared import calculate_sum as sum_chunk, print_compute_result, split_range, timed_run
+from app.config import DEFAULT_WORKERS, SUM_LIMIT, SUM_MODE
+
+
+def calculate_sum(start: int, end: int) -&gt; int:
+    return sum_chunk(start, end, SUM_MODE)
+
+
+def _calculate_chunk(bounds: tuple[int, int]) -&gt; int:
+    return calculate_sum(*bounds)
+
+
+def main() -&gt; None:
+    workers = min(DEFAULT_WORKERS, cpu_count())
+    ranges = split_range(SUM_LIMIT, workers)
+
+    def runner() -&gt; int:
+        with Pool(processes=workers) as pool:
+            return sum(pool.map(_calculate_chunk, ranges))
+
+    result = timed_run(&quot;multiprocessing&quot;, workers, runner)
+    assert result.total == SUM_LIMIT * (SUM_LIMIT + 1) // 2
+    print(f&quot;Mode: {SUM_MODE}; N: {SUM_LIMIT}&quot;)
+    print_compute_result(result)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="lr2lab_2task1_threadingpy">Lr2/lab_2/task1_threading.py</h2>
+<pre><code class="language-python">import threading
+
+from app.compute_shared import calculate_sum as sum_chunk, print_compute_result, split_range, timed_run
+from app.config import DEFAULT_WORKERS, SUM_LIMIT, SUM_MODE
+
+
+def calculate_sum(start: int, end: int) -&gt; int:
+    return sum_chunk(start, end, SUM_MODE)
+
+
+def main() -&gt; None:
+    workers = DEFAULT_WORKERS
+    ranges = split_range(SUM_LIMIT, workers)
+    results = [0] * len(ranges)
+
+    def worker(index: int, bounds: tuple[int, int]) -&gt; None:
+        results[index] = calculate_sum(*bounds)
+
+    def runner() -&gt; int:
+        threads = [threading.Thread(target=worker, args=(i, bounds)) for i, bounds in enumerate(ranges)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        return sum(results)
+
+    result = timed_run(&quot;threading&quot;, workers, runner)
+    assert result.total == SUM_LIMIT * (SUM_LIMIT + 1) // 2
+    print(f&quot;Mode: {SUM_MODE}; N: {SUM_LIMIT}&quot;)
+    print_compute_result(result)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="lr2lab_2task2_asyncpy">Lr2/lab_2/task2_async.py</h2>
+<pre><code class="language-python">import asyncio
+import ssl
+import aiohttp
+import certifi
+
+from app.config import DEFAULT_WORKERS, REQUEST_TIMEOUT, URLS, split_items
+from app.parsing import extract_title, run_and_print
+from app.parse_shared import save_page_result
+
+
+async def parse_and_save(url: str, session: aiohttp.ClientSession | None = None) -&gt; bool:
+    if session is None:
+        connector = aiohttp.TCPConnector(ssl=ssl.create_default_context(cafile=certifi.where()))
+        async with aiohttp.ClientSession(connector=connector, timeout=aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)) as client:
+            return await parse_and_save(url, client)
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            title = extract_title(await response.read())
+            await asyncio.to_thread(save_page_result, url, title, response.status, &quot;async&quot;)
+            print(f&quot;[async] {response.status} | {url} | {title}&quot;, flush=True)
+            return True
+    except Exception as error:
+        print(f&quot;[async] ERROR | {url} | {type(error).__name__}: {error}&quot;, flush=True)
+        return False
+
+
+def main() -&gt; None:
+    chunks = split_items(URLS, DEFAULT_WORKERS)
+
+    async def run_async() -&gt; int:
+        connector = aiohttp.TCPConnector(ssl=ssl.create_default_context(cafile=certifi.where()))
+        async with aiohttp.ClientSession(connector=connector, timeout=aiohttp.ClientTimeout(total=REQUEST_TIMEOUT)) as session:
+            async def process_chunk(urls: list[str]) -&gt; int:
+                return sum([await parse_and_save(url, session) for url in urls])
+            return sum(await asyncio.gather(*(process_chunk(chunk) for chunk in chunks)))
+
+    run_and_print(&quot;async&quot;, len(URLS), lambda: asyncio.run(run_async()))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="lr2lab_2task2_multiprocessingpy">Lr2/lab_2/task2_multiprocessing.py</h2>
+<pre><code class="language-python">from multiprocessing import Pool
+from app.config import DEFAULT_WORKERS, URLS, split_items
+from app.parsing import fetch_and_save, run_and_print
+
+
+def parse_and_save(url: str) -&gt; bool:
+    return fetch_and_save(url, &quot;multiprocessing&quot;)
+
+
+def process_chunk(urls: list[str]) -&gt; int:
+    return sum(parse_and_save(url) for url in urls)
+
+
+def main() -&gt; None:
+    chunks = split_items(URLS, DEFAULT_WORKERS)
+
+    def runner() -&gt; int:
+        with Pool(processes=len(chunks)) as pool:
+            return sum(pool.map(process_chunk, chunks))
+
+    run_and_print(&quot;multiprocessing&quot;, len(URLS), runner)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="lr2lab_2task2_threadingpy">Lr2/lab_2/task2_threading.py</h2>
+<pre><code class="language-python">import threading
+from app.config import DEFAULT_WORKERS, URLS, split_items
+from app.parsing import fetch_and_save, run_and_print
+
+
+def parse_and_save(url: str) -&gt; bool:
+    return fetch_and_save(url, &quot;threading&quot;)
+
+
+def main() -&gt; None:
+    chunks = split_items(URLS, DEFAULT_WORKERS)
+    results = [0] * len(chunks)
+
+    def worker(index: int, urls: list[str]) -&gt; None:
+        results[index] = sum(parse_and_save(url) for url in urls)
+
+    def runner() -&gt; int:
+        threads = [threading.Thread(target=worker, args=(i, urls)) for i, urls in enumerate(chunks)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        return sum(results)
+
+    run_and_print(&quot;threading&quot;, len(URLS), runner)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

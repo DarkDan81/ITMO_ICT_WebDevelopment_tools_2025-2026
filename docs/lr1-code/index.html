@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="author" content="Дущенко Даниил">
+        <link rel="canonical" href="https://darkdan.ru/web-labs/lr1-code/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Код ЛР1 - Средства Web-программирования</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Средства Web-программирования</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr1/" class="nav-link">ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Код ЛР1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2/" class="nav-link">ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr2-code/" class="nav-link">Код ЛР2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr3/" class="nav-link">ЛР3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../lr3-code/" class="nav-link">Код ЛР3</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../lr1/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../lr2/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+
+            <li class="nav-item" data-bs-level="1"><a href="#lr1" class="nav-link">Исходный код LR1</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appdbpy" class="nav-link">Lr1/practice_1_3/app/db.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appfinancepy" class="nav-link">Lr1/practice_1_3/app/finance.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appmainpy" class="nav-link">Lr1/practice_1_3/app/main.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appmodelspy" class="nav-link">Lr1/practice_1_3/app/models.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appreportspy" class="nav-link">Lr1/practice_1_3/app/reports.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appsecuritypy" class="nav-link">Lr1/practice_1_3/app/security.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3appuserspy" class="nav-link">Lr1/practice_1_3/app/users.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3migrationsenvpy" class="nav-link">Lr1/practice_1_3/migrations/env.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3migrationsversionsa83973acb777_initial_schemapy" class="nav-link">Lr1/practice_1_3/migrations/versions/a83973acb777_initial_schema.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3migrationsversionsb8d18406f516_add_priority_to_operation_tag_linkpy" class="nav-link">Lr1/practice_1_3/migrations/versions/b8d18406f516_add_priority_to_operation_tag_link.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lr1practice_1_3migrationsversionsc901_authpy" class="nav-link">Lr1/practice_1_3/migrations/versions/c901_auth.py</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="lr1">Исходный код LR1</h1>
+<p>Код соответствует текущим файлам проекта.</p>
+<h2 id="lr1practice_1_3appdbpy">Lr1/practice_1_3/app/db.py</h2>
+<pre><code class="language-python">import os
+
+from dotenv import load_dotenv
+from sqlmodel import Session, SQLModel, create_engine
+
+load_dotenv()
+
+DATABASE_URL = os.getenv(
+    &quot;DATABASE_URL&quot;,
+    &quot;postgresql://postgres@localhost:5432/personal_finance_practice_3_db&quot;,
+)
+
+engine = create_engine(DATABASE_URL, echo=False)
+
+
+def init_db() -&gt; None:
+    SQLModel.metadata.create_all(engine)
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+</code></pre>
+<h2 id="lr1practice_1_3appfinancepy">Lr1/practice_1_3/app/finance.py</h2>
+<pre><code class="language-python">from fastapi import APIRouter, Depends, HTTPException, Response
+from sqlalchemy.exc import IntegrityError
+from sqlmodel import Session, select
+
+from app.db import get_session
+from app.models import (Category, CategoryCreate, CategoryRead, CategoryReadWithUser, CategoryUpdate,
+                        Operation, OperationCreate, OperationReadWithRelations, OperationTagLink,
+                        OperationUpdate, Tag, TagCreate, TagRead, TagReadWithMetadata, TagUpdate, User, UserRead)
+from app.security import get_current_user
+
+router = APIRouter(tags=[&quot;Финансы&quot;])
+
+
+def owned(model, item_id: int, user: User, session: Session):
+    item = session.get(model, item_id)
+    if item is None or item.user_id != user.id:
+        raise HTTPException(404, &quot;Запись не найдена&quot;)
+    return item
+
+
+def check_owner(user_id: int | None, user: User) -&gt; None:
+    if user_id is not None and user_id != user.id:
+        raise HTTPException(403, &quot;Нельзя указать другого владельца&quot;)
+
+
+def check_tags(assignments, session: Session) -&gt; None:
+    for assignment in assignments:
+        if session.get(Tag, assignment.tag_id) is None:
+            raise HTTPException(400, f&quot;Тег {assignment.tag_id} не найден&quot;)
+
+
+def set_tags(operation: Operation, assignments, session: Session) -&gt; None:
+    for link in session.exec(select(OperationTagLink).where(OperationTagLink.operation_id == operation.id)).all():
+        session.delete(link)
+    session.flush()
+    for tag in assignments:
+        session.add(OperationTagLink(operation_id=operation.id, tag_id=tag.tag_id, priority=tag.priority))
+
+
+def serialize_operation(operation: Operation, session: Session) -&gt; OperationReadWithRelations:
+    links = session.exec(select(OperationTagLink).where(OperationTagLink.operation_id == operation.id)).all()
+    tags = []
+    for link in links:
+        tag = session.get(Tag, link.tag_id)
+        tags.append(TagReadWithMetadata(id=tag.id, name=tag.name, assigned_at=link.assigned_at, priority=link.priority))
+    return OperationReadWithRelations(
+        **operation.model_dump(), user=UserRead.model_validate(operation.user),
+        category=CategoryRead.model_validate(operation.category), tags=tags,
+    )
+
+
+@router.get(&quot;/categories&quot;, response_model=list[CategoryRead])
+def categories(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[Category]:
+    return list(session.exec(select(Category).where(Category.user_id == user.id)).all())
+
+
+@router.get(&quot;/categories/{category_id}&quot;, response_model=CategoryReadWithUser)
+def category(category_id: int, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Category:
+    return owned(Category, category_id, user, session)
+
+
+@router.post(&quot;/categories&quot;, response_model=CategoryRead, status_code=201)
+def create_category(data: CategoryCreate, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Category:
+    check_owner(data.user_id, user)
+    item = Category.model_validate(data.model_dump() | {&quot;user_id&quot;: user.id})
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
+
+
+@router.patch(&quot;/categories/{category_id}&quot;, response_model=CategoryRead)
+def update_category(category_id: int, data: CategoryUpdate, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Category:
+    item = owned(Category, category_id, user, session)
+    check_owner(data.user_id, user)
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(item, key, value)
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
+
+
+@router.delete(&quot;/categories/{category_id}&quot;, status_code=204)
+def delete_category(category_id: int, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Response:
+    item = owned(Category, category_id, user, session)
+    if item.operations:
+        raise HTTPException(409, &quot;Категория используется в операциях&quot;)
+    session.delete(item)
+    session.commit()
+    return Response(status_code=204)
+
+
+# Теги — общий справочник. Личные суммы и категории доступны только владельцу.
+@router.get(&quot;/tags&quot;, response_model=list[TagRead])
+def tags(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[Tag]:
+    return list(session.exec(select(Tag)).all())
+
+
+def get_tag(tag_id: int, session: Session) -&gt; Tag:
+    item = session.get(Tag, tag_id)
+    if item is None:
+        raise HTTPException(404, &quot;Тег не найден&quot;)
+    return item
+
+
+@router.get(&quot;/tags/{tag_id}&quot;, response_model=TagRead)
+def tag(tag_id: int, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Tag:
+    return get_tag(tag_id, session)
+
+
+def save_tag(item: Tag, session: Session) -&gt; Tag:
+    session.add(item)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(409, &quot;Тег с таким именем уже существует&quot;)
+    session.refresh(item)
+    return item
+
+
+@router.post(&quot;/tags&quot;, response_model=TagRead, status_code=201)
+def create_tag(data: TagCreate, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Tag:
+    return save_tag(Tag.model_validate(data), session)
+
+
+@router.patch(&quot;/tags/{tag_id}&quot;, response_model=TagRead)
+def update_tag(tag_id: int, data: TagUpdate, user: User = Depends(get_current_user),
+               session: Session = Depends(get_session)) -&gt; Tag:
+    item = get_tag(tag_id, session)
+    if any(operation.user_id != user.id for operation in item.operations):
+        raise HTTPException(409, &quot;Тег используется другим пользователем&quot;)
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(item, key, value)
+    return save_tag(item, session)
+
+
+@router.delete(&quot;/tags/{tag_id}&quot;, status_code=204)
+def delete_tag(tag_id: int, user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; Response:
+    item = get_tag(tag_id, session)
+    if item.operations:
+        raise HTTPException(409, &quot;Тег используется в операциях&quot;)
+    session.delete(item)
+    session.commit()
+    return Response(status_code=204)
+
+
+@router.get(&quot;/operations&quot;, response_model=list[OperationReadWithRelations])
+def operations(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[OperationReadWithRelations]:
+    items = session.exec(select(Operation).where(Operation.user_id == user.id)).all()
+    return [serialize_operation(item, session) for item in items]
+
+
+@router.get(&quot;/operations/{operation_id}&quot;, response_model=OperationReadWithRelations)
+def operation(operation_id: int, user: User = Depends(get_current_user),
+              session: Session = Depends(get_session)) -&gt; OperationReadWithRelations:
+    return serialize_operation(owned(Operation, operation_id, user, session), session)
+
+
+@router.post(&quot;/operations&quot;, response_model=OperationReadWithRelations, status_code=201)
+def create_operation(data: OperationCreate, user: User = Depends(get_current_user),
+                     session: Session = Depends(get_session)) -&gt; OperationReadWithRelations:
+    check_owner(data.user_id, user)
+    if data.category_id is None:
+        raise HTTPException(422, &quot;Нужно указать category_id&quot;)
+    owned(Category, data.category_id, user, session)
+    check_tags(data.tags, session)
+    item = Operation.model_validate(data.model_dump(exclude={&quot;tags&quot;}) | {&quot;user_id&quot;: user.id})
+    session.add(item)
+    session.flush()  # Получаем id, но ещё не фиксируем операцию.
+    set_tags(item, data.tags, session)
+    session.commit()  # Операция и её теги сохраняются вместе.
+    session.refresh(item)
+    return serialize_operation(item, session)
+
+
+@router.patch(&quot;/operations/{operation_id}&quot;, response_model=OperationReadWithRelations)
+def update_operation(operation_id: int, data: OperationUpdate, user: User = Depends(get_current_user),
+                     session: Session = Depends(get_session)) -&gt; OperationReadWithRelations:
+    item = owned(Operation, operation_id, user, session)
+    check_owner(data.user_id, user)
+    if data.category_id is not None:
+        owned(Category, data.category_id, user, session)
+    if data.tags is not None:
+        check_tags(data.tags, session)
+    for key, value in data.model_dump(exclude_unset=True, exclude={&quot;tags&quot;}).items():
+        setattr(item, key, value)
+    session.add(item)
+    if data.tags is not None:
+        set_tags(item, data.tags, session)
+    session.commit()
+    session.refresh(item)
+    return serialize_operation(item, session)
+
+
+@router.delete(&quot;/operations/{operation_id}&quot;, status_code=204)
+def delete_operation(operation_id: int, user: User = Depends(get_current_user),
+                     session: Session = Depends(get_session)) -&gt; Response:
+    item = owned(Operation, operation_id, user, session)
+    item.tags = []
+    session.delete(item)
+    session.commit()
+    return Response(status_code=204)
+</code></pre>
+<h2 id="lr1practice_1_3appmainpy">Lr1/practice_1_3/app/main.py</h2>
+<pre><code class="language-python">import os
+from fastapi import FastAPI, Depends
+from sqlalchemy import text
+from sqlmodel import Session
+
+from app.db import get_session
+from app.users import router as users_router
+from app.finance import router as finance_router
+from app.reports import router as reports_router
+
+app = FastAPI(title=&quot;Личные финансы — ЛР1&quot;, version=&quot;2.0.0&quot;, root_path=os.getenv(&quot;ROOT_PATH&quot;, &quot;&quot;))
+app.include_router(users_router)
+app.include_router(finance_router)
+app.include_router(reports_router)
+
+
+@app.get(&quot;/&quot;)
+def index() -&gt; dict[str, str]:
+    return {&quot;message&quot;: &quot;Сервис личных финансов&quot;, &quot;docs&quot;: &quot;docs&quot;}
+
+
+@app.get(&quot;/health&quot;)
+def health(session: Session = Depends(get_session)) -&gt; dict[str, str]:
+    session.exec(text(&quot;SELECT 1&quot;))
+    return {&quot;status&quot;: &quot;ok&quot;}
+</code></pre>
+<h2 id="lr1practice_1_3appmodelspy">Lr1/practice_1_3/app/models.py</h2>
+<pre><code class="language-python">from datetime import datetime, timezone
+from enum import Enum
+
+from pydantic import BaseModel, ConfigDict, EmailStr, Field as PydanticField, model_validator
+from sqlmodel import Field, Relationship, SQLModel
+
+
+class AppModel(SQLModel):
+    model_config = ConfigDict(allow_inf_nan=False, str_strip_whitespace=True)
+
+
+class OperationType(str, Enum):
+    income = &quot;income&quot;
+    expense = &quot;expense&quot;
+
+
+class UpdateModel(AppModel):
+    @model_validator(mode=&quot;before&quot;)
+    @classmethod
+    def reject_null_required(cls, values):
+        nullable = {&quot;description&quot;, &quot;monthly_limit&quot;, &quot;priority&quot;}
+        if isinstance(values, dict):
+            for key, value in values.items():
+                if value is None and key not in nullable:
+                    raise ValueError(f&quot;{key} не может быть null&quot;)
+        return values
+
+
+class UserBase(AppModel):
+    email: str = Field(index=True, unique=True, max_length=255)
+    full_name: str = Field(min_length=1, max_length=100)
+
+
+class User(UserBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    hashed_password: str | None = Field(default=None, max_length=255)
+    token_version: int = Field(default=0)
+    categories: list[&quot;Category&quot;] = Relationship(back_populates=&quot;user&quot;)
+    operations: list[&quot;Operation&quot;] = Relationship(back_populates=&quot;user&quot;)
+
+
+class UserCreate(UserBase):
+    email: EmailStr
+    password: str = PydanticField(min_length=8, max_length=128)
+
+
+class UserUpdate(UpdateModel):
+    email: EmailStr | None = None
+    full_name: str | None = Field(default=None, min_length=1, max_length=100)
+
+
+class CategoryBase(AppModel):
+    name: str = Field(min_length=1, max_length=50)
+    monthly_limit: float | None = Field(default=None, ge=0)
+    user_id: int | None = Field(default=None, foreign_key=&quot;user.id&quot;)
+
+
+class Category(CategoryBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user: User | None = Relationship(back_populates=&quot;categories&quot;)
+    operations: list[&quot;Operation&quot;] = Relationship(back_populates=&quot;category&quot;)
+
+
+class CategoryCreate(CategoryBase):
+    pass
+
+
+class CategoryUpdate(UpdateModel):
+    name: str | None = Field(default=None, min_length=1, max_length=50)
+    monthly_limit: float | None = Field(default=None, ge=0)
+    user_id: int | None = None
+
+
+class TagBase(AppModel):
+    name: str = Field(min_length=1, max_length=30, unique=True)
+
+
+class OperationTagLink(SQLModel, table=True):
+    operation_id: int | None = Field(
+        default=None,
+        foreign_key=&quot;operation.id&quot;,
+        primary_key=True,
+    )
+    tag_id: int | None = Field(default=None, foreign_key=&quot;tag.id&quot;, primary_key=True)
+    assigned_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+    priority: int | None = Field(default=None, ge=1, le=5)
+
+
+class Tag(TagBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    operations: list[&quot;Operation&quot;] = Relationship(
+        back_populates=&quot;tags&quot;,
+        link_model=OperationTagLink,
+    )
+
+
+class TagCreate(TagBase):
+    pass
+
+
+class TagUpdate(UpdateModel):
+    name: str | None = Field(default=None, min_length=1, max_length=30)
+
+
+class OperationBase(AppModel):
+    title: str = Field(min_length=1, max_length=100)
+    amount: float = Field(gt=0)
+    operation_type: OperationType
+    operation_date: datetime
+    description: str | None = Field(default=None, max_length=255)
+    user_id: int | None = Field(default=None, foreign_key=&quot;user.id&quot;)
+    category_id: int | None = Field(default=None, foreign_key=&quot;category.id&quot;)
+
+
+class Operation(OperationBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    user: User | None = Relationship(back_populates=&quot;operations&quot;)
+    category: Category | None = Relationship(back_populates=&quot;operations&quot;)
+    tags: list[Tag] = Relationship(
+        back_populates=&quot;operations&quot;,
+        link_model=OperationTagLink,
+    )
+
+
+class OperationTagAssignment(AppModel):
+    tag_id: int
+    priority: int | None = Field(default=None, ge=1, le=5)
+
+
+class OperationCreate(OperationBase):
+    @model_validator(mode=&quot;after&quot;)
+    def unique_tags(self):
+        ids = [tag.tag_id for tag in self.tags]
+        if len(ids) != len(set(ids)):
+            raise ValueError(&quot;Тег не должен повторяться&quot;)
+        return self
+
+    tags: list[OperationTagAssignment] = PydanticField(default_factory=list)
+
+
+class OperationUpdate(UpdateModel):
+    @model_validator(mode=&quot;after&quot;)
+    def unique_tags(self):
+        ids = [tag.tag_id for tag in (self.tags or [])]
+        if len(ids) != len(set(ids)):
+            raise ValueError(&quot;Тег не должен повторяться&quot;)
+        return self
+
+    title: str | None = Field(default=None, min_length=1, max_length=100)
+    amount: float | None = Field(default=None, gt=0)
+    operation_type: OperationType | None = None
+    operation_date: datetime | None = None
+    description: str | None = Field(default=None, max_length=255)
+    user_id: int | None = None
+    category_id: int | None = None
+    tags: list[OperationTagAssignment] | None = None
+
+
+class CategoryRead(CategoryBase):
+    id: int
+
+
+class TagRead(TagBase):
+    id: int
+
+
+class UserRead(UserBase):
+    id: int
+
+
+class UserReadWithRelations(UserRead):
+    categories: list[CategoryRead] = PydanticField(default_factory=list)
+
+
+class CategoryReadWithUser(CategoryRead):
+    user: UserRead | None = None
+
+
+class TagReadWithMetadata(TagRead):
+    assigned_at: datetime
+    priority: int | None = None
+
+
+class OperationRead(OperationBase):
+    id: int
+
+
+class OperationReadWithRelations(OperationRead):
+    user: UserRead | None = None
+    category: CategoryRead | None = None
+    tags: list[TagReadWithMetadata] = PydanticField(default_factory=list)
+
+
+class PasswordChange(BaseModel):
+    old_password: str = PydanticField(max_length=128)
+    new_password: str = PydanticField(min_length=8, max_length=128)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = &quot;bearer&quot;
+</code></pre>
+<h2 id="lr1practice_1_3appreportspy">Lr1/practice_1_3/app/reports.py</h2>
+<pre><code class="language-python">from datetime import datetime
+from decimal import Decimal
+
+from fastapi import APIRouter, Depends, Query
+from pydantic import BaseModel
+from sqlmodel import Session, select
+
+from app.db import get_session
+from app.models import Category, Operation, OperationType, User
+from app.security import get_current_user
+
+router = APIRouter(prefix=&quot;/reports&quot;, tags=[&quot;Отчёты&quot;])
+
+
+class CategoryReport(BaseModel):
+    category_id: int
+    name: str
+    expense: float
+    monthly_limit: float | None
+    remaining: float | None
+    exceeded: bool
+
+
+class MonthlyReport(BaseModel):
+    year: int
+    month: int
+    income: float
+    expense: float
+    balance: float
+    categories: list[CategoryReport]
+
+
+@router.get(&quot;/monthly&quot;, response_model=MonthlyReport)
+def monthly_report(year: int = Query(ge=2000, le=9998), month: int = Query(ge=1, le=12),
+                   user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; MonthlyReport:
+    start = datetime(year, month, 1)
+    end = datetime(year + 1, 1, 1) if month == 12 else datetime(year, month + 1, 1)
+    operations = session.exec(select(Operation).where(
+        Operation.user_id == user.id, Operation.operation_date &gt;= start, Operation.operation_date &lt; end,
+    )).all()
+    income = Decimal(&quot;0&quot;)
+    expense = Decimal(&quot;0&quot;)
+    spent = {}
+    for operation in operations:
+        amount = Decimal(str(operation.amount))
+        if operation.operation_type == OperationType.income:
+            income += amount
+        else:
+            expense += amount
+            spent[operation.category_id] = spent.get(operation.category_id, Decimal(&quot;0&quot;)) + amount
+    categories = []
+    for category in session.exec(select(Category).where(Category.user_id == user.id)).all():
+        total = spent.get(category.id, Decimal(&quot;0&quot;))
+        limit = Decimal(str(category.monthly_limit)) if category.monthly_limit is not None else None
+        categories.append(CategoryReport(
+            category_id=category.id, name=category.name, expense=float(total), monthly_limit=category.monthly_limit,
+            remaining=float(limit - total) if limit is not None else None,
+            exceeded=limit is not None and total &gt; limit,
+        ))
+    return MonthlyReport(year=year, month=month, income=float(income), expense=float(expense),
+                         balance=float(income - expense), categories=categories)
+</code></pre>
+<h2 id="lr1practice_1_3appsecuritypy">Lr1/practice_1_3/app/security.py</h2>
+<pre><code class="language-python">&quot;&quot;&quot;Пароли и JWT. Регистрация и проверка пользователя реализованы вручную.&quot;&quot;&quot;
+import hashlib
+import hmac
+import os
+import secrets
+from datetime import datetime, timedelta, timezone
+
+import jwt
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from sqlmodel import Session
+
+from app.db import get_session
+from app.models import User
+
+SECRET_KEY = os.environ.get(&quot;JWT_SECRET&quot;, &quot;&quot;)
+if len(SECRET_KEY) &lt; 32:
+    raise RuntimeError(&quot;Задайте JWT_SECRET длиной не менее 32 символов в .env&quot;)
+oauth2 = OAuth2PasswordBearer(tokenUrl=&quot;auth/token&quot;)
+
+
+def hash_password(password: str) -&gt; str:
+    salt = secrets.token_hex(16)
+    digest = hashlib.pbkdf2_hmac(&quot;sha256&quot;, password.encode(), salt.encode(), 600_000)
+    return f&quot;pbkdf2_sha256$600000${salt}${digest.hex()}&quot;
+
+
+def verify_password(password: str, stored: str | None) -&gt; bool:
+    if not stored:
+        return False  # У записей из старой практики пароля ещё нет.
+    try:
+        algorithm, iterations, salt, digest = stored.split(&quot;$&quot;)
+        if algorithm != &quot;pbkdf2_sha256&quot;:
+            return False
+        actual = hashlib.pbkdf2_hmac(&quot;sha256&quot;, password.encode(), salt.encode(), int(iterations))
+        return hmac.compare_digest(actual.hex(), digest)
+    except (ValueError, TypeError):
+        return False
+
+
+def create_token(user: User) -&gt; str:
+    now = datetime.now(timezone.utc)
+    return jwt.encode(
+        {&quot;sub&quot;: str(user.id), &quot;iat&quot;: now, &quot;exp&quot;: now + timedelta(minutes=30),
+         &quot;version&quot;: user.token_version}, SECRET_KEY, algorithm=&quot;HS256&quot;,
+    )
+
+
+def get_current_user(token: str = Depends(oauth2), session: Session = Depends(get_session)) -&gt; User:
+    error = HTTPException(401, &quot;Требуется действующий токен&quot;, headers={&quot;WWW-Authenticate&quot;: &quot;Bearer&quot;})
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[&quot;HS256&quot;],
+                             options={&quot;require&quot;: [&quot;sub&quot;, &quot;exp&quot;, &quot;iat&quot;, &quot;version&quot;]})
+        user = session.get(User, int(payload[&quot;sub&quot;]))
+    except (jwt.InvalidTokenError, ValueError, TypeError):
+        raise error
+    if user is None or user.token_version != payload[&quot;version&quot;]:
+        raise error
+    return user
+</code></pre>
+<h2 id="lr1practice_1_3appuserspy">Lr1/practice_1_3/app/users.py</h2>
+<pre><code class="language-python">from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.exc import IntegrityError
+from sqlmodel import Session, select
+
+from app.db import get_session
+from app.models import User, UserCreate, UserRead, UserReadWithRelations, UserUpdate, PasswordChange, Token
+from app.security import create_token, get_current_user, hash_password, verify_password
+
+router = APIRouter(tags=[&quot;Пользователи&quot;])
+
+
+@router.post(&quot;/auth/register&quot;, response_model=UserRead, status_code=201)
+@router.post(&quot;/users&quot;, response_model=UserRead, status_code=201)
+def register(data: UserCreate, session: Session = Depends(get_session)) -&gt; User:
+    user = User(email=str(data.email).lower(), full_name=data.full_name,
+                hashed_password=hash_password(data.password))
+    session.add(user)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(409, &quot;Email уже зарегистрирован&quot;)
+    session.refresh(user)
+    return user
+
+
+@router.post(&quot;/auth/token&quot;, response_model=Token)
+def login(form: OAuth2PasswordRequestForm = Depends(), session: Session = Depends(get_session)) -&gt; Token:
+    user = session.exec(select(User).where(User.email == form.username.lower())).first()
+    if user is None or not verify_password(form.password, user.hashed_password):
+        raise HTTPException(401, &quot;Неверный email или пароль&quot;, headers={&quot;WWW-Authenticate&quot;: &quot;Bearer&quot;})
+    return Token(access_token=create_token(user))
+
+
+@router.get(&quot;/users/me&quot;, response_model=UserReadWithRelations)
+def me(user: User = Depends(get_current_user)) -&gt; User:
+    return user
+
+
+@router.post(&quot;/users/me/password&quot;, status_code=204)
+def change_password(data: PasswordChange, user: User = Depends(get_current_user),
+                    session: Session = Depends(get_session)) -&gt; Response:
+    if not verify_password(data.old_password, user.hashed_password):
+        raise HTTPException(400, &quot;Неверный текущий пароль&quot;)
+    user.hashed_password = hash_password(data.new_password)
+    user.token_version += 1  # Старые токены перестают действовать.
+    session.add(user)
+    session.commit()
+    return Response(status_code=204)
+
+
+@router.get(&quot;/users&quot;, response_model=list[UserRead])
+def users(user: User = Depends(get_current_user), session: Session = Depends(get_session)) -&gt; list[User]:
+    return list(session.exec(select(User)).all())
+
+
+@router.get(&quot;/users/{user_id}&quot;, response_model=UserRead)
+def read_user(user_id: int, user: User = Depends(get_current_user),
+              session: Session = Depends(get_session)) -&gt; User:
+    found = session.get(User, user_id)
+    if found is None:
+        raise HTTPException(404, &quot;Пользователь не найден&quot;)
+    return found
+
+
+@router.patch(&quot;/users/{user_id}&quot;, response_model=UserRead)
+def update_user(user_id: int, data: UserUpdate, user: User = Depends(get_current_user),
+                session: Session = Depends(get_session)) -&gt; User:
+    if user_id != user.id:
+        raise HTTPException(403, &quot;Можно менять только свой профиль&quot;)
+    for key, value in data.model_dump(exclude_unset=True).items():
+        setattr(user, key, str(value).lower() if key == &quot;email&quot; else value)
+    session.add(user)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(409, &quot;Email уже зарегистрирован&quot;)
+    session.refresh(user)
+    return user
+
+
+@router.delete(&quot;/users/{user_id}&quot;, status_code=204)
+def delete_user(user_id: int, user: User = Depends(get_current_user),
+                session: Session = Depends(get_session)) -&gt; Response:
+    if user_id != user.id:
+        raise HTTPException(403, &quot;Можно удалить только свой профиль&quot;)
+    if user.operations or user.categories:
+        raise HTTPException(409, &quot;Сначала удалите операции и категории&quot;)
+    session.delete(user)
+    session.commit()
+    return Response(status_code=204)
+</code></pre>
+<h2 id="lr1practice_1_3migrationsenvpy">Lr1/practice_1_3/migrations/env.py</h2>
+<pre><code class="language-python">from logging.config import fileConfig
+import os
+
+from dotenv import load_dotenv
+from sqlalchemy import engine_from_config
+from sqlalchemy import pool
+
+from alembic import context
+from sqlmodel import SQLModel
+
+from app import models  # noqa: F401
+
+# this is the Alembic Config object, which provides
+# access to the values within the .ini file in use.
+config = context.config
+load_dotenv()
+database_url = os.getenv(&quot;DATABASE_URL&quot;)
+if database_url:
+    config.set_main_option(&quot;sqlalchemy.url&quot;, database_url)
+
+# Interpret the config file for Python logging.
+# This line sets up loggers basically.
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+# add your model's MetaData object here
+# for 'autogenerate' support
+# from myapp import mymodel
+# target_metadata = mymodel.Base.metadata
+target_metadata = SQLModel.metadata
+
+# other values from the config, defined by the needs of env.py,
+# can be acquired:
+# my_important_option = config.get_main_option(&quot;my_important_option&quot;)
+# ... etc.
+
+
+def run_migrations_offline() -&gt; None:
+    &quot;&quot;&quot;Run migrations in 'offline' mode.
+
+    This configures the context with just a URL
+    and not an Engine, though an Engine is acceptable
+    here as well.  By skipping the Engine creation
+    we don't even need a DBAPI to be available.
+
+    Calls to context.execute() here emit the given string to the
+    script output.
+
+    &quot;&quot;&quot;
+    url = config.get_main_option(&quot;sqlalchemy.url&quot;)
+    context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={&quot;paramstyle&quot;: &quot;named&quot;},
+        compare_type=True,
+    )
+
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+def run_migrations_online() -&gt; None:
+    &quot;&quot;&quot;Run migrations in 'online' mode.
+
+    In this scenario we need to create an Engine
+    and associate a connection with the context.
+
+    &quot;&quot;&quot;
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix=&quot;sqlalchemy.&quot;,
+        poolclass=pool.NullPool,
+    )
+
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            compare_type=True,
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+</code></pre>
+<h2 id="lr1practice_1_3migrationsversionsa83973acb777_initial_schemapy">Lr1/practice_1_3/migrations/versions/a83973acb777_initial_schema.py</h2>
+<pre><code class="language-python">&quot;&quot;&quot;initial schema
+
+Revision ID: a83973acb777
+Revises:
+Create Date: 2026-03-29 22:31:23.402306
+
+&quot;&quot;&quot;
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+import sqlmodel
+
+
+# revision identifiers, used by Alembic.
+revision: str = 'a83973acb777'
+down_revision: Union[str, Sequence[str], None] = None
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+
+def upgrade() -&gt; None:
+    &quot;&quot;&quot;Upgrade schema.&quot;&quot;&quot;
+    op.create_table(
+        &quot;user&quot;,
+        sa.Column(&quot;email&quot;, sqlmodel.sql.sqltypes.AutoString(length=255), nullable=False),
+        sa.Column(&quot;full_name&quot;, sqlmodel.sql.sqltypes.AutoString(length=100), nullable=False),
+        sa.Column(&quot;id&quot;, sa.Integer(), nullable=False),
+        sa.PrimaryKeyConstraint(&quot;id&quot;),
+    )
+    op.create_index(op.f(&quot;ix_user_email&quot;), &quot;user&quot;, [&quot;email&quot;], unique=True)
+
+    op.create_table(
+        &quot;tag&quot;,
+        sa.Column(&quot;name&quot;, sqlmodel.sql.sqltypes.AutoString(length=30), nullable=False),
+        sa.Column(&quot;id&quot;, sa.Integer(), nullable=False),
+        sa.PrimaryKeyConstraint(&quot;id&quot;),
+        sa.UniqueConstraint(&quot;name&quot;),
+    )
+
+    op.create_table(
+        &quot;category&quot;,
+        sa.Column(&quot;name&quot;, sqlmodel.sql.sqltypes.AutoString(length=50), nullable=False),
+        sa.Column(&quot;monthly_limit&quot;, sa.Float(), nullable=True),
+        sa.Column(&quot;user_id&quot;, sa.Integer(), nullable=True),
+        sa.Column(&quot;id&quot;, sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint([&quot;user_id&quot;], [&quot;user.id&quot;]),
+        sa.PrimaryKeyConstraint(&quot;id&quot;),
+    )
+
+    op.create_table(
+        &quot;operation&quot;,
+        sa.Column(&quot;title&quot;, sqlmodel.sql.sqltypes.AutoString(length=100), nullable=False),
+        sa.Column(&quot;amount&quot;, sa.Float(), nullable=False),
+        sa.Column(&quot;operation_type&quot;, sa.Enum(&quot;income&quot;, &quot;expense&quot;, name=&quot;operationtype&quot;), nullable=False),
+        sa.Column(&quot;operation_date&quot;, sa.DateTime(), nullable=False),
+        sa.Column(&quot;description&quot;, sqlmodel.sql.sqltypes.AutoString(length=255), nullable=True),
+        sa.Column(&quot;user_id&quot;, sa.Integer(), nullable=True),
+        sa.Column(&quot;category_id&quot;, sa.Integer(), nullable=True),
+        sa.Column(&quot;id&quot;, sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint([&quot;category_id&quot;], [&quot;category.id&quot;]),
+        sa.ForeignKeyConstraint([&quot;user_id&quot;], [&quot;user.id&quot;]),
+        sa.PrimaryKeyConstraint(&quot;id&quot;),
+    )
+
+    op.create_table(
+        &quot;operationtaglink&quot;,
+        sa.Column(&quot;operation_id&quot;, sa.Integer(), nullable=False),
+        sa.Column(&quot;tag_id&quot;, sa.Integer(), nullable=False),
+        sa.Column(&quot;assigned_at&quot;, sa.DateTime(), nullable=False),
+        sa.ForeignKeyConstraint([&quot;operation_id&quot;], [&quot;operation.id&quot;]),
+        sa.ForeignKeyConstraint([&quot;tag_id&quot;], [&quot;tag.id&quot;]),
+        sa.PrimaryKeyConstraint(&quot;operation_id&quot;, &quot;tag_id&quot;),
+    )
+
+
+def downgrade() -&gt; None:
+    &quot;&quot;&quot;Downgrade schema.&quot;&quot;&quot;
+    op.drop_table(&quot;operationtaglink&quot;)
+    op.drop_table(&quot;operation&quot;)
+    op.drop_table(&quot;category&quot;)
+    op.drop_table(&quot;tag&quot;)
+    op.drop_index(op.f(&quot;ix_user_email&quot;), table_name=&quot;user&quot;)
+    op.drop_table(&quot;user&quot;)
+
+    operation_type = sa.Enum(&quot;income&quot;, &quot;expense&quot;, name=&quot;operationtype&quot;)
+    operation_type.drop(op.get_bind(), checkfirst=True)
+</code></pre>
+<h2 id="lr1practice_1_3migrationsversionsb8d18406f516_add_priority_to_operation_tag_linkpy">Lr1/practice_1_3/migrations/versions/b8d18406f516_add_priority_to_operation_tag_link.py</h2>
+<pre><code class="language-python">&quot;&quot;&quot;add priority to operation tag link
+
+Revision ID: b8d18406f516
+Revises: a83973acb777
+Create Date: 2026-03-29 22:31:27.271934
+
+&quot;&quot;&quot;
+from typing import Sequence, Union
+
+from alembic import op
+import sqlalchemy as sa
+import sqlmodel
+
+
+# revision identifiers, used by Alembic.
+revision: str = 'b8d18406f516'
+down_revision: Union[str, Sequence[str], None] = 'a83973acb777'
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+
+def upgrade() -&gt; None:
+    &quot;&quot;&quot;Upgrade schema.&quot;&quot;&quot;
+    op.add_column(
+        &quot;operationtaglink&quot;,
+        sa.Column(&quot;priority&quot;, sa.Integer(), nullable=True),
+    )
+
+
+def downgrade() -&gt; None:
+    &quot;&quot;&quot;Downgrade schema.&quot;&quot;&quot;
+    op.drop_column(&quot;operationtaglink&quot;, &quot;priority&quot;)
+</code></pre>
+<h2 id="lr1practice_1_3migrationsversionsc901_authpy">Lr1/practice_1_3/migrations/versions/c901_auth.py</h2>
+<pre><code class="language-python">&quot;&quot;&quot;Пароли и отзыв токенов после смены пароля.
+
+Старые учебные пользователи сохраняются без пароля: вход для них закрыт.
+Для проверки авторизации нужно зарегистрировать нового пользователя.
+&quot;&quot;&quot;
+from alembic import op
+import sqlalchemy as sa
+
+revision = &quot;c901_auth&quot;
+down_revision = &quot;b8d18406f516&quot;
+branch_labels = None
+depends_on = None
+
+
+def upgrade() -&gt; None:
+    op.add_column(&quot;user&quot;, sa.Column(&quot;hashed_password&quot;, sa.String(255), nullable=True))
+    op.add_column(&quot;user&quot;, sa.Column(&quot;token_version&quot;, sa.Integer(), nullable=False, server_default=&quot;0&quot;))
+
+
+def downgrade() -&gt; None:
+    op.drop_column(&quot;user&quot;, &quot;token_version&quot;)
+    op.drop_column(&quot;user&quot;, &quot;hashed_password&quot;)
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
